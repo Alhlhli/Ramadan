@@ -1,0 +1,3287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>محراب رمضان 1447 - رفيقك الرقمي في الشهر الكريم</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- Tone.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'naskh': ['"Noto Naskh Arabic"', 'serif'],
+                        'tajawal': ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        'ramadan-dark': '#0f172a',
+                        'ramadan-darker': '#020617',
+                        'ramadan-gold': '#d4af37',
+                        'ramadan-gold-light': '#f4d03f',
+                        'ramadan-green': '#1e5945',
+                        'ramadan-teal': '#0d9488',
+                        'ramadan-accent': '#f59e0b',
+                        'ramadan-purple': '#7c3aed',
+                        'ramadan-rose': '#e11d48',
+                        'shanqiti': '#2d5a27',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'playing': 'playing 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        playing: {
+                            '0%, 100%': { transform: 'scaleY(1)' },
+                            '50%': { transform: 'scaleY(1.5)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Default Dark Theme Variables */
+        :root {
+            --bg-primary: #020617;
+            --bg-secondary: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.6);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gold-color: #d4af37;
+        }
+
+        /* Light Theme Variables */
+        html.light-theme {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --gold-color: #b45309;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, #1e1b4b 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        html.light-theme body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+        }
+        
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        html.light-theme .glass-panel {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(135deg, var(--gold-color) 0%, #f4d03f 50%, var(--gold-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        html.light-theme .gold-gradient-text {
+            background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #b45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.5s ease-in-out;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        .task-checkbox:checked + div {
+            background: linear-gradient(135deg, #1e5945 0%, #0d9488 100%);
+            border-color: var(--gold-color);
+        }
+        
+        .task-checkbox:checked + div .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        
+        .audio-player {
+            background: linear-gradient(135deg, rgba(30, 89, 69, 0.8) 0%, rgba(13, 148, 136, 0.8) 100%);
+        }
+        
+        .day-card {
+            transition: all 0.3s ease;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.3);
+        }
+        
+        html.light-theme .day-card:hover {
+            box-shadow: 0 10px 40px -10px rgba(180, 83, 9, 0.2);
+        }
+        
+        .best-day-badge {
+            background: linear-gradient(135deg, var(--gold-color) 0%, #f4d03f 100%);
+            animation: pulse 2s infinite;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-color);
+            border-radius: 4px;
+        }
+        
+        .verse-display {
+            font-family: 'Noto Naskh Arabic', serif;
+            line-height: 2;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Golden Tips Cards Styles */
+        .tip-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(15, 23, 42, 0.95) 100%);
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        html.light-theme .tip-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.95) 100%);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .tip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.7s;
+        }
+        
+        .tip-card:hover::before {
+            left: 100%;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        
+        html.light-theme .tip-card:hover {
+            box-shadow: 0 20px 40px -10px rgba(180, 83, 9, 0.2);
+            border-color: rgba(180, 83, 9, 0.3);
+        }
+        
+        .tip-card.completed {
+            background: linear-gradient(135deg, rgba(30, 89, 69, 0.3) 0%, rgba(13, 148, 136, 0.2) 100%);
+            border-color: rgba(13, 148, 136, 0.5);
+        }
+        
+        html.light-theme .tip-card.completed {
+            background: linear-gradient(135deg, rgba(30, 89, 69, 0.15) 0%, rgba(13, 148, 136, 0.1) 100%);
+        }
+        
+        .tip-number {
+            background: linear-gradient(135deg, var(--gold-color) 0%, #f4d03f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+            font-weight: 900;
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .tip-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tip-card:hover .tip-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .check-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .check-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .check-btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .quote-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, var(--bg-card) 100%);
+            border-right: 4px solid var(--gold-color);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            border-color: var(--gold-color);
+        }
+
+        /* Audio Card Styles */
+        .audio-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(45, 90, 39, 0.1) 100%);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .audio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #2d5a27, #4a9c3f);
+        }
+        
+        .audio-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 10px 30px -5px rgba(45, 90, 39, 0.3);
+        }
+        
+        .audio-card.playing {
+            background: linear-gradient(135deg, rgba(45, 90, 39, 0.2) 0%, rgba(74, 156, 63, 0.1) 100%);
+            border-color: #4a9c3f;
+        }
+        
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2d5a27 0%, #4a9c3f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(45, 90, 39, 0.4);
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(45, 90, 39, 0.5);
+        }
+        
+        .play-btn.playing {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            animation: pulse 2s infinite;
+        }
+        
+        .wave-bar {
+            width: 3px;
+            background: #4a9c3f;
+            border-radius: 2px;
+            animation: playing 1s ease-in-out infinite;
+        }
+        
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+        
+        .audio-progress {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .audio-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #2d5a27, #4a9c3f);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Surah Selector */
+        .surah-selector {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        html.light-theme .surah-selector {
+            background: white;
+            color: #0f172a;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 200px;
+            width: 100%;
+        }
+
+        /* Prayer Item */
+        .prayer-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+        
+        html.light-theme .prayer-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Text Colors for Light Theme */
+        html.light-theme .text-slate-200 { color: #1e293b; }
+        html.light-theme .text-slate-300 { color: #334155; }
+        html.light-theme .text-slate-400 { color: #475569; }
+        html.light-theme .text-slate-500 { color: #64748b; }
+        html.light-theme .text-slate-600 { color: #64748b; }
+        html.light-theme .bg-slate-800 { background-color: #f1f5f9; }
+        html.light-theme .bg-slate-800\/50 { background-color: rgba(241, 245, 249, 0.5); }
+        html.light-theme .bg-slate-700 { background-color: #e2e8f0; }
+        html.light-theme .bg-slate-900 { background-color: #ffffff; }
+        html.light-theme .border-slate-700 { border-color: #e2e8f0; }
+        html.light-theme .border-slate-800 { border-color: #f1f5f9; }
+    </style>
+</head>
+<body>
+
+    <!-- Theme Toggle Button -->
+    <button onclick="toggleTheme()" class="theme-toggle" title="تبديل الوضع الفاتح/الغامق">
+        <i class="fas fa-sun" id="theme-icon"></i>
+    </button>
+
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-64 h-64 bg-ramadan-gold rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-ramadan-teal rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-ramadan-green rounded-full mix-blend-multiply filter blur-3xl opacity-5 animate-float" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="relative z-10 max-w-7xl mx-auto p-4 md:p-6">
+        
+        <!-- Header -->
+        <header class="mb-8 text-center relative">
+            <div class="inline-block mb-4">
+                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-ramadan-gold to-ramadan-accent flex items-center justify-center shadow-lg shadow-ramadan-gold/20">
+                    <i class="fas fa-moon text-3xl text-ramadan-darker"></i>
+                </div>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold gold-gradient-text mb-2 font-naskh">محراب رمضان 1447</h1>
+            <p class="text-ramadan-gold/80 text-lg md:text-xl font-light tracking-wide">"ليكن كأنه رمضانك الأخير"</p>
+            
+            <!-- Date & Hijri Display -->
+            <div class="mt-4 flex justify-center gap-4 text-sm text-slate-400 flex-wrap">
+                <span id="current-date" class="glass-panel px-4 py-2 rounded-full"></span>
+                <span id="ramadan-day" class="glass-panel px-4 py-2 rounded-full text-ramadan-gold"></span>
+                <span id="ramadan-status" class="glass-panel px-4 py-2 rounded-full text-ramadan-teal"></span>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex flex-wrap justify-center gap-2 mb-8 sticky top-4 z-50 glass-panel rounded-2xl p-2 mx-auto max-w-5xl">
+            <button onclick="switchTab('dashboard')" class="nav-btn active flex-1 min-w-[100px] py-3 px-4 rounded-xl transition-all duration-300 hover:bg-ramadan-gold/20 text-sm font-medium flex items-center justify-center gap-2 bg-ramadan-gold/20 text-ramadan-gold border border-ramadan-gold/30" data-tab="dashboard">
+                <i class="fas fa-chart-pie"></i> لوحة التحكم
+            </button>
+            <button onclick="switchTab('prayers')" class="nav-btn flex-1 min-w-[100px] py-3 px-4 rounded-xl transition-all duration-300 hover:bg-ramadan-gold/20 text-sm font-medium flex items-center justify-center gap-2 text-slate-400" data-tab="prayers">
+                <i class="fas fa-mosque"></i> الشعائر
+            </button>
+            <button onclick="switchTab('quran')" class="nav-btn flex-1 min-w-[100px] py-3 px-4 rounded-xl transition-all duration-300 hover:bg-ramadan-gold/20 text-sm font-medium flex items-center justify-center gap-2 text-slate-400" data-tab="quran">
+                <i class="fas fa-book-quran"></i> الفرقان
+            </button>
+            <button onclick="switchTab('social')" class="nav-btn flex-1 min-w-[100px] py-3 px-4 rounded-xl transition-all duration-300 hover:bg-ramadan-gold/20 text-sm font-medium flex items-center justify-center gap-2 text-slate-400" data-tab="social">
+                <i class="fas fa-users"></i> الإحسان
+            </button>
+            <button onclick="switchTab('media')" class="nav-btn flex-1 min-w-[100px] py-3 px-4 rounded-xl transition-all duration-300 hover:bg-ramadan-gold/20 text-sm font-medium flex items-center justify-center gap-2 text-slate-400" data-tab="media">
+                <i class="fas fa-radio"></i> الوسائط
+            </button>
+            <button onclick="switchTab('tips')" class="nav-btn flex-1 min-w-[100px] py-3 px-4 rounded-xl transition-all duration-300 hover:bg-ramadan-gold/20 text-sm font-medium flex items-center justify-center gap-2 text-slate-400 border-2 border-ramadan-gold/20" data-tab="tips">
+                <i class="fas fa-lightbulb text-ramadan-gold"></i> <span class="hidden md:inline">الاقتراحات الذهبية</span>
+                <span class="md:hidden">اقتراحات</span>
+            </button>
+        </nav>
+
+        <!-- Dashboard Tab -->
+        <section id="dashboard-tab" class="tab-content animate-slide-up">
+            <!-- Daily Score Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Progress Circle -->
+                <div class="glass-panel rounded-3xl p-6 text-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-ramadan-gold to-ramadan-accent"></div>
+                    <h3 class="text-ramadan-gold mb-4 font-bold text-lg">نسبة إنجاز اليوم</h3>
+                    <div class="relative w-40 h-40 mx-auto mb-4">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="80" cy="80" r="70" stroke="rgba(148, 163, 184, 0.2)" stroke-width="12" fill="none"></circle>
+                            <circle id="progress-circle" cx="80" cy="80" r="70" stroke="url(#gradient)" stroke-width="12" fill="none" 
+                                    stroke-dasharray="440" stroke-dashoffset="440" stroke-linecap="round" class="progress-ring-circle"></circle>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#d4af37" />
+                                    <stop offset="100%" stop-color="#f4d03f" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center flex-col">
+                            <span id="daily-percentage" class="text-4xl font-bold gold-gradient-text">0%</span>
+                            <span class="text-xs text-slate-400 mt-1">نقاط التقوى</span>
+                        </div>
+                    </div>
+                    <div id="best-day-badge" class="hidden best-day-badge text-ramadan-darker px-4 py-2 rounded-full text-sm font-bold inline-flex items-center gap-2">
+                        <i class="fas fa-crown"></i> أفضل يوم!
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="glass-panel rounded-3xl p-6">
+                    <h3 class="text-ramadan-gold mb-4 font-bold text-lg flex items-center gap-2">
+                        <i class="fas fa-fire"></i> إحصائيات سريعة
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded-xl">
+                            <span class="text-slate-400">الأيام المنجزة</span>
+                            <span id="completed-days" class="text-2xl font-bold text-ramadan-gold">0/30</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded-xl">
+                            <span class="text-slate-400">متوسط الإنجاز</span>
+                            <span id="avg-score" class="text-2xl font-bold text-ramadan-teal">0%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded-xl">
+                            <span class="text-slate-400">الأجر التراكمي</span>
+                            <span id="total-ajr" class="text-2xl font-bold text-ramadan-accent">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Thief Warning -->
+                <div class="glass-panel rounded-3xl p-6 border-2 border-red-500/30 bg-red-500/5">
+                    <h3 class="text-red-400 mb-4 font-bold text-lg flex items-center gap-2">
+                        <i class="fas fa-shield-halved"></i> حماية الوقت
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 bg-red-500/10 rounded-xl">
+                            <i class="fas fa-mobile-screen text-red-400 text-xl"></i>
+                            <div class="flex-1">
+                                <p class="text-sm text-slate-300">تذكير: لا تسرق نفسك بالهاتف</p>
+                                <p class="text-xs text-slate-500">"احرص على ألا يسرق الهاتف وقتك"</p>
+                            </div>
+                        </div>
+                        <button onclick="activateFocusMode()" class="w-full py-3 bg-gradient-to-r from-red-600 to-red-500 rounded-xl text-white font-bold hover:shadow-lg hover:shadow-red-500/30 transition-all">
+                            تفعيل وضع التركيز <i class="fas fa-crosshairs mr-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Calendar Grid -->
+            <div class="glass-panel rounded-3xl p-6 mb-8">
+                <h3 class="text-ramadan-gold mb-6 font-bold text-xl flex items-center justify-between">
+                    <span><i class="fas fa-calendar-days ml-2"></i> رحلة الشهر</span>
+                    <button onclick="exportToGoogleSheets()" class="text-sm bg-ramadan-green/20 text-ramadan-teal px-4 py-2 rounded-lg hover:bg-ramadan-green/30 transition-colors">
+                        <i class="fas fa-file-export ml-1"></i> تصدير البيانات
+                    </button>
+                </h3>
+				                <div id="calendar-grid" class="grid grid-cols-5 md:grid-cols-10 gap-2">
+                    <!-- Generated by JS -->
+                </div>
+
+
+
+				<div class="mt-4 flex justify-end">
+								<button onclick="clearTodayData()" class="text-sm bg-red-500/20 text-red-400 px-4 py-2 rounded-lg hover:bg-red-500/30 transition-colors mr-2">
+    <i class="fas fa-trash-can ml-1"></i> مسح اليوم
+</button>
+    <button onclick="clearAllData()" class="text-sm bg-red-600/20 text-red-500 px-6 py-2 rounded-lg hover:bg-red-600/30 transition-colors border border-red-500/30">
+        <i class="fas fa-trash-alt ml-2"></i> مسح كل البيانات (بكلمة المرور)
+    </button>
+</div>
+            </div>
+
+            <!-- Chart Section - Smaller -->
+            <div class="glass-panel rounded-3xl p-6">
+                <h3 class="text-ramadan-gold mb-4 font-bold text-lg">مخطط التطور</h3>
+                <div class="chart-container">
+                    <canvas id="progressChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prayers Tab (الشعائر) -->
+        <section id="prayers-tab" class="tab-content hidden animate-slide-up">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Obligatory Prayers -->
+                <div class="glass-panel rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-ramadan-gold font-bold text-xl flex items-center gap-2">
+                            <i class="fas fa-star-and-crescent"></i> الصلوات الخمس
+                        </h3>
+                        <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full">الوزن: 40%</span>
+                    </div>
+                    
+                    <div class="space-y-4" id="obligatory-prayers">
+                        <!-- Fajr -->
+                        <div class="prayer-item bg-slate-800/50 rounded-2xl p-4 flex items-center justify-between group hover:bg-slate-800 transition-all" data-prayer="fajr" data-weight="8">
+                            <div class="flex items-center gap-4">
+                                <label class="relative cursor-pointer">
+                                    <input type="checkbox" class="task-checkbox sr-only" onchange="togglePrayer(this, 'fajr')">
+                                    <div class="w-8 h-8 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all group-hover:border-ramadan-gold">
+                                        <i class="fas fa-check text-ramadan-darker check-icon opacity-0 transform scale-50 transition-all"></i>
+                                    </div>
+                                </label>
+                                <div>
+                                    <h4 class="font-bold text-lg">صلاة الفجر</h4>
+                                    <label class="flex items-center gap-2 text-xs text-slate-400 mt-1 cursor-pointer">
+                                        <input type="checkbox" class="takbeer-checkbox accent-ramadan-gold" onchange="toggleTakbeer(this, 'fajr')">
+                                        <span>تكبيرة الإحرام جماعة بالمسجد</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-2xl font-bold text-slate-600 prayer-score">0</span>
+                                <span class="text-xs text-slate-500 block">نقطة</span>
+                            </div>
+                        </div>
+
+                        <!-- Dhuhr -->
+                        <div class="prayer-item bg-slate-800/50 rounded-2xl p-4 flex items-center justify-between group hover:bg-slate-800 transition-all" data-prayer="dhuhr" data-weight="8">
+                            <div class="flex items-center gap-4">
+                                <label class="relative cursor-pointer">
+                                    <input type="checkbox" class="task-checkbox sr-only" onchange="togglePrayer(this, 'dhuhr')">
+                                    <div class="w-8 h-8 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all group-hover:border-ramadan-gold">
+                                        <i class="fas fa-check text-ramadan-darker check-icon opacity-0 transform scale-50 transition-all"></i>
+                                    </div>
+                                </label>
+                                <div>
+                                    <h4 class="font-bold text-lg">صلاة الظهر</h4>
+                                    <label class="flex items-center gap-2 text-xs text-slate-400 mt-1 cursor-pointer">
+                                        <input type="checkbox" class="takbeer-checkbox accent-ramadan-gold" onchange="toggleTakbeer(this, 'dhuhr')">
+                                        <span>تكبيرة الإحرام جماعة بالمسجد</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-2xl font-bold text-slate-600 prayer-score">0</span>
+                                <span class="text-xs text-slate-500 block">نقطة</span>
+                            </div>
+                        </div>
+
+                        <!-- Asr -->
+                        <div class="prayer-item bg-slate-800/50 rounded-2xl p-4 flex items-center justify-between group hover:bg-slate-800 transition-all" data-prayer="asr" data-weight="8">
+                            <div class="flex items-center gap-4">
+                                <label class="relative cursor-pointer">
+                                    <input type="checkbox" class="task-checkbox sr-only" onchange="togglePrayer(this, 'asr')">
+                                    <div class="w-8 h-8 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all group-hover:border-ramadan-gold">
+                                        <i class="fas fa-check text-ramadan-darker check-icon opacity-0 transform scale-50 transition-all"></i>
+                                    </div>
+                                </label>
+                                <div>
+                                    <h4 class="font-bold text-lg">صلاة العصر</h4>
+                                    <label class="flex items-center gap-2 text-xs text-slate-400 mt-1 cursor-pointer">
+                                        <input type="checkbox" class="takbeer-checkbox accent-ramadan-gold" onchange="toggleTakbeer(this, 'asr')">
+                                        <span>تكبيرة الإحرام جماعة بالمسجد</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-2xl font-bold text-slate-600 prayer-score">0</span>
+                                <span class="text-xs text-slate-500 block">نقطة</span>
+                            </div>
+                        </div>
+
+                        <!-- Maghrib -->
+                        <div class="prayer-item bg-slate-800/50 rounded-2xl p-4 flex items-center justify-between group hover:bg-slate-800 transition-all" data-prayer="maghrib" data-weight="8">
+                            <div class="flex items-center gap-4">
+                                <label class="relative cursor-pointer">
+                                    <input type="checkbox" class="task-checkbox sr-only" onchange="togglePrayer(this, 'maghrib')">
+                                    <div class="w-8 h-8 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all group-hover:border-ramadan-gold">
+                                        <i class="fas fa-check text-ramadan-darker check-icon opacity-0 transform scale-50 transition-all"></i>
+                                    </div>
+                                </label>
+                                <div>
+                                    <h4 class="font-bold text-lg">صلاة المغرب</h4>
+                                    <label class="flex items-center gap-2 text-xs text-slate-400 mt-1 cursor-pointer">
+                                        <input type="checkbox" class="takbeer-checkbox accent-ramadan-gold" onchange="toggleTakbeer(this, 'maghrib')">
+                                        <span>تكبيرة الإحرام جماعة بالمسجد</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-2xl font-bold text-slate-600 prayer-score">0</span>
+                                <span class="text-xs text-slate-500 block">نقطة</span>
+                            </div>
+                        </div>
+
+                        <!-- Isha -->
+                        <div class="prayer-item bg-slate-800/50 rounded-2xl p-4 flex items-center justify-between group hover:bg-slate-800 transition-all" data-prayer="isha" data-weight="8">
+                            <div class="flex items-center gap-4">
+                                <label class="relative cursor-pointer">
+                                    <input type="checkbox" class="task-checkbox sr-only" onchange="togglePrayer(this, 'isha')">
+                                    <div class="w-8 h-8 rounded-full border-2 border-slate-600 flex items-center justify-center transition-all group-hover:border-ramadan-gold">
+                                        <i class="fas fa-check text-ramadan-darker check-icon opacity-0 transform scale-50 transition-all"></i>
+                                    </div>
+                                </label>
+                                <div>
+                                    <h4 class="font-bold text-lg">صلاة العشاء</h4>
+                                    <label class="flex items-center gap-2 text-xs text-slate-400 mt-1 cursor-pointer">
+                                        <input type="checkbox" class="takbeer-checkbox accent-ramadan-gold" onchange="toggleTakbeer(this, 'isha')">
+                                        <span>تكبيرة الإحرام جماعة بالمسجد</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-2xl font-bold text-slate-600 prayer-score">0</span>
+                                <span class="text-xs text-slate-500 block">نقطة</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sunnah & Night Prayers -->
+                <div class="space-y-6">
+                    <!-- Rawatib -->
+                    <div class="glass-panel rounded-3xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-ramadan-gold font-bold text-lg flex items-center gap-2">
+                                <i class="fas fa-sun"></i> السنن الرواتب (12 ركعة)
+                            </h3>
+                            <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full">الوزن: 15%</span>
+                        </div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <button onclick="adjustSunnah(-2)" class="w-12 h-12 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-2xl transition-colors">-</button>
+                            <div class="flex-1 text-center">
+                                <span id="sunnah-count" class="text-4xl font-bold text-ramadan-gold">0</span>
+                                <span class="text-slate-400">/ 12</span>
+                            </div>
+                            <button onclick="adjustSunnah(2)" class="w-12 h-12 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-2xl transition-colors">+</button>
+                        </div>
+                        <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div id="sunnah-progress" class="h-full bg-gradient-to-r from-ramadan-gold to-ramadan-accent transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Duha -->
+                    <div class="glass-panel rounded-3xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-ramadan-gold font-bold text-lg flex items-center gap-2">
+                                <i class="fas fa-cloud-sun"></i> صلاة الضحى (2-8 ركعات)
+                            </h3>
+                            <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full">الوزن: 10%</span>
+                        </div>
+                        <div class="flex gap-2 mb-4">
+                            <button onclick="setDuha(2)" class="duha-btn flex-1 py-3 rounded-xl bg-slate-800 hover:bg-ramadan-gold/20 transition-all text-sm border border-transparent" data-value="2">2</button>
+                            <button onclick="setDuha(4)" class="duha-btn flex-1 py-3 rounded-xl bg-slate-800 hover:bg-ramadan-gold/20 transition-all text-sm border border-transparent" data-value="4">4</button>
+                            <button onclick="setDuha(6)" class="duha-btn flex-1 py-3 rounded-xl bg-slate-800 hover:bg-ramadan-gold/20 transition-all text-sm border border-transparent" data-value="6">6</button>
+                            <button onclick="setDuha(8)" class="duha-btn flex-1 py-3 rounded-xl bg-slate-800 hover:bg-ramadan-gold/20 transition-all text-sm border border-transparent" data-value="8">8</button>
+                        </div>
+                    </div>
+
+                    <!-- Taraweeh -->
+                    <div class="glass-panel rounded-3xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-ramadan-gold font-bold text-lg flex items-center gap-2">
+                                <i class="fas fa-moon"></i> التراويح (8 ركعات)
+                            </h3>
+                            <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full">الوزن: 15%</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <input type="range" min="0" max="8" step="2" value="0" oninput="updateTaraweeh(this.value)" class="flex-1 h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-ramadan-gold">
+                            <span id="taraweeh-value" class="text-2xl font-bold text-ramadan-gold w-16 text-center">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Qiyam & Witr -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-panel rounded-3xl p-6">
+                            <h3 class="text-ramadan-gold font-bold text-lg mb-4 flex items-center gap-2">
+                                <i class="fas fa-star"></i> قيام الليل
+                            </h3>
+                            <select onchange="updateQiyam(this.value)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-slate-300 focus:border-ramadan-gold focus:outline-none">
+                                <option value="0">لم أقم</option>
+                                <option value="4">4 ركعات</option>
+                                <option value="8">8 ركعات</option>
+                                <option value="more">أكثر من 8</option>
+                            </select>
+                        </div>
+                        <div class="glass-panel rounded-3xl p-6">
+                            <h3 class="text-ramadan-gold font-bold text-lg mb-4 flex items-center gap-2">
+                                <i class="fas fa-hand-holding-water"></i> الوتر (3 ركعات)
+                            </h3>
+                            <label class="flex items-center justify-between cursor-pointer">
+                                <span class="text-slate-400">أداء الوتر</span>
+                                <input type="checkbox" onchange="toggleWitr(this)" class="w-6 h-6 rounded-lg accent-ramadan-gold">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quran Tab (الفرقان) -->
+        <section id="quran-tab" class="tab-content hidden animate-slide-up">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Daily Reading -->
+                <div class="lg:col-span-2 glass-panel rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-ramadan-gold font-bold text-2xl flex items-center gap-2">
+                            <i class="fas fa-book-open"></i> ورد التلاوة اليومي
+                        </h3>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm text-slate-400">الهدف: 30 صفحة</span>
+                            <span class="text-xs bg-ramadan-green/20 text-ramadan-teal px-3 py-1 rounded-full">الوزن: 20%</span>
+                        </div>
+                    </div>
+
+                    <!-- Surah Range Selector -->
+<!-- Surah Range Selector with all 114 Surahs and correct verse counts -->
+<div class="mb-6 p-4 bg-slate-800/50 rounded-2xl border border-slate-700">
+    <h4 class="text-ramadan-gold font-bold mb-3 flex items-center gap-2">
+        <i class="fas fa-bookmark"></i> من سورة إلى سورة
+    </h4>
+    <div class="grid grid-cols-2 gap-4 mb-3">
+        <div>
+            <label class="block text-xs text-slate-400 mb-1">من سورة:</label>
+            <select id="from-surah" class="surah-selector w-full rounded-lg p-2 text-sm">
+                <option value="1">الفاتحة (1-7)</option>
+                <option value="2">البقرة (1-286)</option>
+                <option value="3">آل عمران (1-200)</option>
+                <option value="4">النساء (1-176)</option>
+                <option value="5">المائدة (1-120)</option>
+                <option value="6">الأنعام (1-165)</option>
+                <option value="7">الأعراف (1-206)</option>
+                <option value="8">الأنفال (1-75)</option>
+                <option value="9">التوبة (1-129)</option>
+                <option value="10">يونس (1-109)</option>
+                <option value="11">هود (1-123)</option>
+                <option value="12">يوسف (1-111)</option>
+                <option value="13">الرعد (1-43)</option>
+                <option value="14">إبراهيم (1-52)</option>
+                <option value="15">الحجر (1-99)</option>
+                <option value="16">النحل (1-128)</option>
+                <option value="17">الإسراء (1-111)</option>
+                <option value="18">الكهف (1-110)</option>
+                <option value="19">مريم (1-98)</option>
+                <option value="20">طه (1-135)</option>
+                <option value="21">الأنبياء (1-112)</option>
+                <option value="22">الحج (1-78)</option>
+                <option value="23">المؤمنون (1-118)</option>
+                <option value="24">النور (1-64)</option>
+                <option value="25">الفرقان (1-77)</option>
+                <option value="26">الشعراء (1-227)</option>
+                <option value="27">النمل (1-93)</option>
+                <option value="28">القصص (1-88)</option>
+                <option value="29">العنكبوت (1-69)</option>
+                <option value="30">الروم (1-60)</option>
+                <option value="31">لقمان (1-34)</option>
+                <option value="32">السجدة (1-30)</option>
+                <option value="33">الأحزاب (1-73)</option>
+                <option value="34">سبأ (1-54)</option>
+                <option value="35">فاطر (1-45)</option>
+                <option value="36">يس (1-83)</option>
+                <option value="37">الصافات (1-182)</option>
+                <option value="38">ص (1-88)</option>
+                <option value="39">الزمر (1-75)</option>
+                <option value="40">غافر (1-85)</option>
+                <option value="41">فصلت (1-54)</option>
+                <option value="42">الشورى (1-53)</option>
+                <option value="43">الزخرف (1-89)</option>
+                <option value="44">الدخان (1-59)</option>
+                <option value="45">الجاثية (1-37)</option>
+                <option value="46">الأحقاف (1-35)</option>
+                <option value="47">محمد (1-38)</option>
+                <option value="48">الفتح (1-29)</option>
+                <option value="49">الحجرات (1-18)</option>
+                <option value="50">ق (1-45)</option>
+                <option value="51">الذاريات (1-60)</option>
+                <option value="52">الطور (1-49)</option>
+                <option value="53">النجم (1-62)</option>
+                <option value="54">القمر (1-55)</option>
+                <option value="55">الرحمن (1-78)</option>
+                <option value="56">الواقعة (1-96)</option>
+                <option value="57">الحديد (1-29)</option>
+                <option value="58">المجادلة (1-22)</option>
+                <option value="59">الحشر (1-24)</option>
+                <option value="60">الممتحنة (1-13)</option>
+                <option value="61">الصف (1-14)</option>
+                <option value="62">الجمعة (1-11)</option>
+                <option value="63">المنافقون (1-11)</option>
+                <option value="64">التغابن (1-18)</option>
+                <option value="65">الطلاق (1-12)</option>
+                <option value="66">التحريم (1-12)</option>
+                <option value="67">الملك (1-30)</option>
+                <option value="68">القلم (1-52)</option>
+                <option value="69">الحاقة (1-52)</option>
+                <option value="70">المعارج (1-44)</option>
+                <option value="71">نوح (1-28)</option>
+                <option value="72">الجن (1-28)</option>
+                <option value="73">المزمل (1-20)</option>
+                <option value="74">المدثر (1-56)</option>
+                <option value="75">القيامة (1-40)</option>
+                <option value="76">الإنسان (1-31)</option>
+                <option value="77">المرسلات (1-50)</option>
+                <option value="78">النبأ (1-40)</option>
+                <option value="79">النازعات (1-46)</option>
+                <option value="80">عبس (1-42)</option>
+                <option value="81">التكوير (1-29)</option>
+                <option value="82">الانفطار (1-19)</option>
+                <option value="83">المطففين (1-36)</option>
+                <option value="84">الانشقاق (1-25)</option>
+                <option value="85">البروج (1-22)</option>
+                <option value="86">الطارق (1-17)</option>
+                <option value="87">الأعلى (1-19)</option>
+                <option value="88">الغاشية (1-26)</option>
+                <option value="89">الفجر (1-30)</option>
+                <option value="90">البلد (1-20)</option>
+                <option value="91">الشمس (1-15)</option>
+                <option value="92">الليل (1-21)</option>
+                <option value="93">الضحى (1-11)</option>
+                <option value="94">الشرح (1-8)</option>
+                <option value="95">التين (1-8)</option>
+                <option value="96">العلق (1-19)</option>
+                <option value="97">القدر (1-5)</option>
+                <option value="98">البينة (1-8)</option>
+                <option value="99">الزلزلة (1-8)</option>
+                <option value="100">العاديات (1-11)</option>
+                <option value="101">القارعة (1-11)</option>
+                <option value="102">التكاثر (1-8)</option>
+                <option value="103">العصر (1-3)</option>
+                <option value="104">الهمزة (1-9)</option>
+                <option value="105">الفيل (1-5)</option>
+                <option value="106">قريش (1-4)</option>
+                <option value="107">الماعون (1-7)</option>
+                <option value="108">الكوثر (1-3)</option>
+                <option value="109">الكافرون (1-6)</option>
+                <option value="110">النصر (1-3)</option>
+                <option value="111">المسد (1-5)</option>
+                <option value="112">الإخلاص (1-4)</option>
+                <option value="113">الفلق (1-5)</option>
+                <option value="114">الناس (1-6)</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs text-slate-400 mb-1">إلى سورة:</label>
+            <select id="to-surah" onchange="updateReadingRange()" class="surah-selector w-full rounded-lg p-2 text-sm">
+                <option value="1">الفاتحة (1-7)</option>
+                <option value="2" selected>البقرة (1-286)</option>
+                <option value="3">آل عمران (1-200)</option>
+                <option value="4">النساء (1-176)</option>
+                <option value="5">المائدة (1-120)</option>
+                <option value="6">الأنعام (1-165)</option>
+                <option value="7">الأعراف (1-206)</option>
+                <option value="8">الأنفال (1-75)</option>
+                <option value="9">التوبة (1-129)</option>
+                <option value="10">يونس (1-109)</option>
+                <option value="11">هود (1-123)</option>
+                <option value="12">يوسف (1-111)</option>
+                <option value="13">الرعد (1-43)</option>
+                <option value="14">إبراهيم (1-52)</option>
+                <option value="15">الحجر (1-99)</option>
+                <option value="16">النحل (1-128)</option>
+                <option value="17">الإسراء (1-111)</option>
+                <option value="18">الكهف (1-110)</option>
+                <option value="19">مريم (1-98)</option>
+                <option value="20">طه (1-135)</option>
+                <option value="21">الأنبياء (1-112)</option>
+                <option value="22">الحج (1-78)</option>
+                <option value="23">المؤمنون (1-118)</option>
+                <option value="24">النور (1-64)</option>
+                <option value="25">الفرقان (1-77)</option>
+                <option value="26">الشعراء (1-227)</option>
+                <option value="27">النمل (1-93)</option>
+                <option value="28">القصص (1-88)</option>
+                <option value="29">العنكبوت (1-69)</option>
+                <option value="30">الروم (1-60)</option>
+                <option value="31">لقمان (1-34)</option>
+                <option value="32">السجدة (1-30)</option>
+                <option value="33">الأحزاب (1-73)</option>
+                <option value="34">سبأ (1-54)</option>
+                <option value="35">فاطر (1-45)</option>
+                <option value="36">يس (1-83)</option>
+                <option value="37">الصافات (1-182)</option>
+                <option value="38">ص (1-88)</option>
+                <option value="39">الزمر (1-75)</option>
+                <option value="40">غافر (1-85)</option>
+                <option value="41">فصلت (1-54)</option>
+                <option value="42">الشورى (1-53)</option>
+                <option value="43">الزخرف (1-89)</option>
+                <option value="44">الدخان (1-59)</option>
+                <option value="45">الجاثية (1-37)</option>
+                <option value="46">الأحقاف (1-35)</option>
+                <option value="47">محمد (1-38)</option>
+                <option value="48">الفتح (1-29)</option>
+                <option value="49">الحجرات (1-18)</option>
+                <option value="50">ق (1-45)</option>
+                <option value="51">الذاريات (1-60)</option>
+                <option value="52">الطور (1-49)</option>
+                <option value="53">النجم (1-62)</option>
+                <option value="54">القمر (1-55)</option>
+                <option value="55">الرحمن (1-78)</option>
+                <option value="56">الواقعة (1-96)</option>
+                <option value="57">الحديد (1-29)</option>
+                <option value="58">المجادلة (1-22)</option>
+                <option value="59">الحشر (1-24)</option>
+                <option value="60">الممتحنة (1-13)</option>
+                <option value="61">الصف (1-14)</option>
+                <option value="62">الجمعة (1-11)</option>
+                <option value="63">المنافقون (1-11)</option>
+                <option value="64">التغابن (1-18)</option>
+                <option value="65">الطلاق (1-12)</option>
+                <option value="66">التحريم (1-12)</option>
+                <option value="67">الملك (1-30)</option>
+                <option value="68">القلم (1-52)</option>
+                <option value="69">الحاقة (1-52)</option>
+                <option value="70">المعارج (1-44)</option>
+                <option value="71">نوح (1-28)</option>
+                <option value="72">الجن (1-28)</option>
+                <option value="73">المزمل (1-20)</option>
+                <option value="74">المدثر (1-56)</option>
+                <option value="75">القيامة (1-40)</option>
+                <option value="76">الإنسان (1-31)</option>
+                <option value="77">المرسلات (1-50)</option>
+                <option value="78">النبأ (1-40)</option>
+                <option value="79">النازعات (1-46)</option>
+                <option value="80">عبس (1-42)</option>
+                <option value="81">التكوير (1-29)</option>
+                <option value="82">الانفطار (1-19)</option>
+                <option value="83">المطففين (1-36)</option>
+                <option value="84">الانشقاق (1-25)</option>
+                <option value="85">البروج (1-22)</option>
+                <option value="86">الطارق (1-17)</option>
+                <option value="87">الأعلى (1-19)</option>
+                <option value="88">الغاشية (1-26)</option>
+                <option value="89">الفجر (1-30)</option>
+                <option value="90">البلد (1-20)</option>
+                <option value="91">الشمس (1-15)</option>
+                <option value="92">الليل (1-21)</option>
+                <option value="93">الضحى (1-11)</option>
+                <option value="94">الشرح (1-8)</option>
+                <option value="95">التين (1-8)</option>
+                <option value="96">العلق (1-19)</option>
+                <option value="97">القدر (1-5)</option>
+                <option value="98">البينة (1-8)</option>
+                <option value="99">الزلزلة (1-8)</option>
+                <option value="100">العاديات (1-11)</option>
+                <option value="101">القارعة (1-11)</option>
+                <option value="102">التكاثر (1-8)</option>
+                <option value="103">العصر (1-3)</option>
+                <option value="104">الهمزة (1-9)</option>
+                <option value="105">الفيل (1-5)</option>
+                <option value="106">قريش (1-4)</option>
+                <option value="107">الماعون (1-7)</option>
+                <option value="108">الكوثر (1-3)</option>
+                <option value="109">الكافرون (1-6)</option>
+                <option value="110">النصر (1-3)</option>
+                <option value="111">المسد (1-5)</option>
+                <option value="112">الإخلاص (1-4)</option>
+                <option value="113">الفلق (1-5)</option>
+                <option value="114">الناس (1-6)</option>
+            </select>
+        </div>
+    </div>
+    <div class="flex gap-4">
+        <div class="flex-1">
+            <label class="block text-xs text-slate-400 mb-1">من آية:</label>
+            <input type="number" id="from-ayah" min="1" value="1" onchange="updateReadingRange()" class="surah-selector w-full rounded-lg p-2 text-sm text-center">
+        </div>
+        <div class="flex-1">
+            <label class="block text-xs text-slate-400 mb-1">إلى آية:</label>
+            <input type="number" id="to-ayah" min="1" value="286" onchange="updateReadingRange()" class="surah-selector w-full rounded-lg p-2 text-sm text-center">
+        </div>
+    </div>
+    <div id="range-result" class="mt-3 text-sm text-ramadan-gold text-center font-bold"></div>
+</div>
+
+
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-slate-400">التقدم اليومي</span>
+                            <span id="pages-read-display" class="text-ramadan-gold font-bold">0 / 30 صفحة</span>
+                        </div>
+                        <div class="h-4 bg-slate-800 rounded-full overflow-hidden relative">
+                            <div id="reading-progress" class="h-full bg-gradient-to-r from-ramadan-green via-ramadan-teal to-ramadan-gold transition-all duration-700" style="width: 0%"></div>
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" style="background-size: 1000px 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <button onclick="addPages(1)" class="py-4 bg-slate-800 hover:bg-ramadan-green/20 rounded-2xl transition-all border border-slate-700 hover:border-ramadan-gold group">
+                            <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">+1</span>
+                            <span class="text-xs text-slate-400">صفحة</span>
+                        </button>
+                        <button onclick="addPages(5)" class="py-4 bg-slate-800 hover:bg-ramadan-green/20 rounded-2xl transition-all border border-slate-700 hover:border-ramadan-gold group">
+                            <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">+5</span>
+                            <span class="text-xs text-slate-400">صفحات</span>
+                        </button>
+                        <button onclick="addPages(10)" class="py-4 bg-slate-800 hover:bg-ramadan-green/20 rounded-2xl transition-all border border-slate-700 hover:border-ramadan-gold group">
+                            <span class="block text-2xl mb-1 group-hover:scale-110 transition-transform">+10</span>
+                            <span class="text-xs text-slate-400">صفحات</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-800/50 rounded-2xl p-4">
+                        <label class="block text-sm text-slate-400 mb-2">إدخال يدوي:</label>
+                        <div class="flex gap-2">
+                            <input type="number" id="manual-pages" min="0" max="30" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-ramadan-gold font-bold focus:border-ramadan-gold focus:outline-none" placeholder="عدد الصفحات">
+                            <button onclick="setManualPages()" class="px-6 bg-ramadan-gold text-ramadan-darker font-bold rounded-xl hover:bg-ramadan-gold-light transition-colors">
+                                تحديث
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tadabbur Section -->
+                    <div class="mt-6 p-4 border border-ramadan-gold/30 rounded-2xl bg-ramadan-gold/5">
+                        <h4 class="text-ramadan-gold font-bold mb-2 flex items-center gap-2">
+                            <i class="fas fa-lightbulb"></i> تدبر الآيات
+                        </h4>
+                        <p class="text-sm text-slate-400 mb-3">"أطل السجود وأكثر الدعاء"</p>
+                        <textarea class="w-full bg-slate-900/50 border border-slate-700 rounded-xl p-3 text-sm text-slate-300 focus:border-ramadan-gold focus:outline-none resize-none" rows="3" placeholder="اكتب تأملاتك على ما قرأت..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Memorization -->
+                <div class="glass-panel rounded-3xl p-6">
+                    <h3 class="text-ramadan-gold font-bold text-xl mb-6 flex items-center gap-2">
+                        <i class="fas fa-brain"></i> الحفظ والتدبر
+                    </h3>
+                    
+                    <div class="mb-6 p-4 bg-gradient-to-br from-ramadan-green/20 to-ramadan-teal/20 rounded-2xl border border-ramadan-teal/30">
+                        <h4 class="font-bold text-ramadan-teal mb-2">سورة آل عمران</h4>
+                        <p class="text-sm text-slate-400 mb-4">صفحة واحدة يومياً مع التفسير</p>
+                        <div class="flex items-center gap-2">
+                            <button onclick="markMemorization(true)" class="flex-1 py-2 bg-ramadan-green text-white rounded-lg text-sm hover:bg-ramadan-green/80 transition-colors">
+                                <i class="fas fa-check ml-1"></i> تم
+                            </button>
+                            <button onclick="markMemorization(false)" class="flex-1 py-2 bg-slate-700 text-slate-400 rounded-lg text-sm hover:bg-slate-600 transition-colors">
+                                <i class="fas fa-times ml-1"></i> لم يتم
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-xl">
+                            <span class="text-slate-400">أذكار الصباح</span>
+                            <input type="checkbox" onchange="toggleAthkar('morning')" class="w-5 h-5 accent-ramadan-gold rounded">
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-xl">
+                            <span class="text-slate-400">أذكار المساء</span>
+                            <input type="checkbox" onchange="toggleAthkar('evening')" class="w-5 h-5 accent-ramadan-gold rounded">
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-xl">
+                            <span class="text-slate-400">ورد المحاسبة</span>
+                            <input type="checkbox" onchange="toggleAccounting()" class="w-5 h-5 accent-ramadan-gold rounded">
+                        </div>
+                    </div>
+
+                    <!-- Daily Dua -->
+                    <div class="mt-6 p-4 bg-slate-800/30 rounded-2xl">
+                        <h4 class="text-ramadan-gold font-bold mb-3 text-sm">الدعاء بيقين</h4>
+                        <div class="space-y-2" id="dua-list">
+                            <input type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-300 focus:border-ramadan-gold focus:outline-none" placeholder="اكتب دعاءك هنا..." onblur="saveDua(this, 0)">
+                            <input type="text" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-300 focus:border-ramadan-gold focus:outline-none" placeholder="دعاء للأمة..." onblur="saveDua(this, 1)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Tab (الإحسان) -->
+        <section id="social-tab" class="tab-content hidden animate-slide-up">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Family -->
+                <div class="glass-panel rounded-3xl p-6 border-t-4 border-ramadan-gold">
+                    <h3 class="text-ramadan-gold font-bold text-xl mb-6 flex items-center gap-2">
+                        <i class="fas fa-house-chimney"></i> الجانب الأسري
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <label class="flex items-center gap-3 p-4 bg-slate-800/50 rounded-2xl cursor-pointer hover:bg-slate-800 transition-all">
+                            <input type="checkbox" onchange="toggleSocial('parents')" class="w-6 h-6 accent-ramadan-gold rounded-lg">
+                            <div class="flex-1">
+                                <h4 class="font-bold">بر الوالدين وصلة الرحم</h4>
+                                <p class="text-xs text-slate-400">مساعدتهما - تقبيلهما - الاتصال</p>
+                            </div>
+                            <span class="text-xs bg-ramadan-gold/20 text-ramadan-gold px-2 py-1 rounded">يومي</span>
+                        </label>
+
+                        <label class="flex items-center gap-3 p-4 bg-slate-800/50 rounded-2xl cursor-pointer hover:bg-slate-800 transition-all">
+                            <input type="checkbox" onchange="toggleSocial('family_session')" class="w-6 h-6 accent-ramadan-gold rounded-lg">
+                            <div class="flex-1">
+                                <h4 class="font-bold">الجلسة الأسرية الإيمانية</h4>
+                                <p class="text-xs text-slate-400">إقامة دروس منزلية يومية</p>
+                            </div>
+                            <span class="text-xs bg-ramadan-gold/20 text-ramadan-gold px-2 py-1 rounded">يومي</span>
+                        </label>
+
+                        <label class="flex items-center gap-3 p-4 bg-slate-800/50 rounded-2xl cursor-pointer hover:bg-slate-800 transition-all">
+                            <input type="checkbox" onchange="toggleSocial('children_follow')" class="w-6 h-6 accent-ramadan-gold rounded-lg">
+                            <div class="flex-1">
+                                <h4 class="font-bold">المتابعة التربوية للأولاد</h4>
+                                <p class="text-xs text-slate-400">نصيحة - اصطحاب للمسجد - تسميع</p>
+                            </div>
+                            <span class="text-xs bg-ramadan-gold/20 text-ramadan-gold px-2 py-1 rounded">يومي</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Weekly Tasks -->
+                <div class="glass-panel rounded-3xl p-6 border-t-4 border-ramadan-teal">
+                    <h3 class="text-ramadan-teal font-bold text-xl mb-6 flex items-center gap-2">
+                        <i class="fas fa-handshake"></i> المهام الأسبوعية
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-800/50 rounded-2xl">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-bold">زيارة الأصدقاء</h4>
+                                <span class="text-xs text-slate-400">4 أسبوعياً</span>
+                            </div>
+                            <div class="flex gap-2" id="friend-visits">
+                                <button onclick="toggleWeekly('friends', 0)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">1</button>
+                                <button onclick="toggleWeekly('friends', 1)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">2</button>
+                                <button onclick="toggleWeekly('friends', 2)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">3</button>
+                                <button onclick="toggleWeekly('friends', 3)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">4</button>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-slate-800/50 rounded-2xl">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-bold">إلقاء درس أو خاطرة</h4>
+                                <span class="text-xs text-slate-400">4 أسبوعياً</span>
+                            </div>
+                            <div class="flex gap-2" id="lessons-given">
+                                <button onclick="toggleWeekly('lessons', 0)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">1</button>
+                                <button onclick="toggleWeekly('lessons', 1)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">2</button>
+                                <button onclick="toggleWeekly('lessons', 2)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">3</button>
+                                <button onclick="toggleWeekly('lessons', 3)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">4</button>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-slate-800/50 rounded-2xl">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-bold">زيارة أخوية وإفطار جماعي</h4>
+                                <span class="text-xs text-slate-400">4 أسبوعياً</span>
+                            </div>
+                            <div class="flex gap-2" id="brotherhood-visits">
+                                <button onclick="toggleWeekly('brotherhood', 0)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">1</button>
+                                <button onclick="toggleWeekly('brotherhood', 1)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">2</button>
+                                <button onclick="toggleWeekly('brotherhood', 2)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">3</button>
+                                <button onclick="toggleWeekly('brotherhood', 3)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-teal transition-colors flex items-center justify-center text-xs">4</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charity -->
+                <div class="glass-panel rounded-3xl p-6 border-t-4 border-ramadan-accent">
+                    <h3 class="text-ramadan-accent font-bold text-xl mb-6 flex items-center gap-2">
+                        <i class="fas fa-hand-holding-heart"></i> الصدقة والإحسان
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <label class="flex items-center gap-3 p-4 bg-slate-800/50 rounded-2xl cursor-pointer hover:bg-slate-800 transition-all">
+                            <input type="checkbox" onchange="toggleSocial('charity')" class="w-6 h-6 accent-ramadan-accent rounded-lg">
+                            <div class="flex-1">
+                                <h4 class="font-bold">الصدقة وتزكية النفس</h4>
+                                <p class="text-xs text-slate-400">"خذ من أموالهم صدقة تطهرهم"</p>
+                            </div>
+                            <span class="text-xs bg-ramadan-accent/20 text-ramadan-accent px-2 py-1 rounded">يومي</span>
+                        </label>
+
+                        <div class="p-4 bg-slate-800/50 rounded-2xl">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-bold">تفطير صائم</h4>
+                                <span class="text-xs text-slate-400">4 أسبوعياً</span>
+                            </div>
+                            <div class="flex gap-2" id="iftar-count">
+                                <button onclick="toggleWeekly('iftar', 0)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-accent transition-colors flex items-center justify-center text-xs">1</button>
+                                <button onclick="toggleWeekly('iftar', 1)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-accent transition-colors flex items-center justify-center text-xs">2</button>
+                                <button onclick="toggleWeekly('iftar', 2)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-accent transition-colors flex items-center justify-center text-xs">3</button>
+                                <button onclick="toggleWeekly('iftar', 3)" class="weekly-btn w-10 h-10 rounded-lg bg-slate-700 hover:bg-ramadan-accent transition-colors flex items-center justify-center text-xs">4</button>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="p-4 bg-gradient-to-r from-ramadan-accent/20 to-ramadan-gold/20 rounded-2xl border border-ramadan-accent/30">
+                            <h4 class="font-bold text-ramadan-accent mb-2">النصيحة الفردية</h4>
+                            <p class="text-xs text-slate-400 mb-3">"لعدد 3 مستمر - لأن يهدي الله بك رجلاً واحداً"</p>
+                            <div class="flex gap-2">
+                                <button onclick="setAdvice(1)" class="advice-btn flex-1 py-2 rounded-lg bg-slate-800 hover:bg-ramadan-accent/30 transition-colors text-sm border border-slate-700" data-count="1">1</button>
+                                <button onclick="setAdvice(2)" class="advice-btn flex-1 py-2 rounded-lg bg-slate-800 hover:bg-ramadan-accent/30 transition-colors text-sm border border-slate-700" data-count="2">2</button>
+                                <button onclick="setAdvice(3)" class="advice-btn flex-1 py-2 rounded-lg bg-slate-800 hover:bg-ramadan-accent/30 transition-colors text-sm border border-slate-700" data-count="3">3</button>
+                            </div>
+                        </div>
+                    </div>
+					            <!-- Social Solidarity -->
+            <div class="mt-6 glass-panel rounded-3xl p-6">
+                <h3 class="text-ramadan-gold font-bold text-xl mb-4 flex items-center gap-2">
+                    <i class="fas fa-people-carry-box"></i> التكافل الاجتماعي
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-800/30 rounded-2xl flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-ramadan-green/20 flex items-center justify-center text-ramadan-teal text-xl">
+                            <i class="fas fa-hand-point-right"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">الحث على فعل الخير</h4>
+                            <p class="text-sm text-slate-400">خير الناس أنفعهم للناس</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-800/30 rounded-2xl flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-ramadan-gold/20 flex items-center justify-center text-ramadan-gold text-xl">
+                            <i class="fas fa-share-nodes"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">الدلالة على الخير</h4>
+                            <p class="text-sm text-slate-400">من دل على خير فله مثل أجر فاعله</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              </div>
+
+
+        </section>
+
+        <!-- Media Tab (الوسائط) -->
+        <section id="media-tab" class="tab-content hidden animate-slide-up">
+            <!-- Sub Navigation for Media -->
+            <div class="flex flex-wrap justify-center gap-2 mb-6">
+                <button onclick="switchMediaTab('radio')" class="media-sub-btn active px-6 py-2 rounded-full text-sm font-medium transition-all bg-ramadan-gold/20 text-ramadan-gold border border-ramadan-gold/30" data-media="radio">
+                    <i class="fas fa-radio ml-2"></i>إذاعة القرآن
+                </button>
+                <button onclick="switchMediaTab('quran')" class="media-sub-btn px-6 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:bg-ramadan-gold/10" data-media="quran">
+                    <i class="fas fa-book-quran ml-2"></i>مصحف آيات
+                </button>
+                <button onclick="switchMediaTab('shanqiti')" class="media-sub-btn px-6 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:bg-shanqiti/10 border border-shanqiti/20" data-media="shanqiti">
+                    <i class="fas fa-headphones ml-2"></i>الشيخ الشنقيطي
+                </button>
+                <button onclick="switchMediaTab('cultural')" class="media-sub-btn px-6 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:bg-ramadan-gold/10" data-media="cultural">
+                    <i class="fas fa-graduation-cap ml-2"></i>محتوى ثقافي
+                </button>
+            </div>
+
+            <!-- Radio Section -->
+            <div id="media-radio" class="media-section">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Quran Radio -->
+                    <div class="glass-panel rounded-3xl p-6">
+                        <h3 class="text-ramadan-gold font-bold text-2xl mb-6 flex items-center gap-2">
+                            <i class="fas fa-broadcast-tower"></i> إذاعة القرآن الكريم
+                        </h3>
+                        
+                        <div class="audio-player rounded-2xl p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center animate-pulse-slow" id="radio-visualizer">
+                                        <i class="fas fa-signal text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 id="current-station" class="font-bold text-white">إذاعة القرآن الكريم</h4>
+                                        <p class="text-xs text-white/70">بث مباشر</p>
+                                    </div>
+                                </div>
+                                <button onclick="toggleRadio()" id="play-btn" class="w-14 h-14 rounded-full bg-white text-ramadan-green flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-lg">
+                                    <i class="fas fa-play ml-1"></i>
+                                </button>
+                            </div>
+                            
+                            <audio id="quran-radio" preload="none">
+                                <source src="https://stream.radiojar.com/8s5u5tpdtwzuv" type="audio/mpeg">
+                                <source src="https://Qurango.net/radio/tarateel" type="audio/mpeg">
+                            </audio>
+
+                            <div class="h-1 bg-white/20 rounded-full overflow-hidden">
+                                <div id="audio-progress" class="h-full bg-white/60 w-0 transition-all duration-1000"></div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="changeStation('https://stream.radiojar.com/8s5u5tpdtwzuv', 'إذاعة القرآن - القاهرة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                                <i class="fas fa-mosque ml-2 text-ramadan-gold"></i> القاهرة
+                            </button>
+                            <button onclick="changeStation('https://stream.radiojar.com/0tpy1h0kxtzuv', 'إذاعة القرآن - السعودية')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                                <i class="fas fa-kaaba ml-2 text-ramadan-gold"></i> السعودية
+                            </button>
+                            <button onclick="changeStation('https://Qurango.net/radio/tarateel', 'تراتيل قصيرة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                                <i class="fas fa-music ml-2 text-ramadan-gold"></i> تراتيل قصيرة
+                            </button>
+                            <button onclick="changeStation('https://Qurango.net/radio/sakeenah', 'آيات السكينة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                                <i class="fas fa-feather ml-2 text-ramadan-gold"></i> آيات السكينة
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Radio Info -->
+                    <div class="glass-panel rounded-3xl p-6 flex flex-col justify-center">
+                        <div class="text-center">
+                            <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-ramadan-green to-ramadan-teal flex items-center justify-center">
+                                <i class="fas fa-radio text-4xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-ramadan-gold mb-4">استمع إلى القرآن الكريم</h3>
+                            <p class="text-slate-400 mb-6 leading-relaxed">
+                                اختر من محطات الإذاعة المختلفة للاستماع إلى تلاوات متنوعة<br>
+                                من أفضل القراء حول العالم
+                            </p>
+                            <div class="flex justify-center gap-4 text-sm text-slate-500">
+                                <span class="flex items-center gap-2">
+                                    <i class="fas fa-wifi text-ramadan-teal"></i> بث مباشر
+                                </span>
+                                <span class="flex items-center gap-2">
+                                    <i class="fas fa-infinity text-ramadan-teal"></i> 24 ساعة
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ayat Quran Section -->
+            <div id="media-quran" class="media-section hidden">
+                <div class="glass-panel rounded-3xl p-6">
+                    <h3 class="text-ramadan-gold font-bold text-2xl mb-6 flex items-center gap-2">
+                        <i class="fas fa-book-quran"></i> مصحف آيات
+                    </h3>
+                    
+                    <div class="bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 relative min-h-[600px]">
+                        <iframe id="ayat-frame" src="https://www.ayat.app" class="w-full h-full absolute inset-0 border-0" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                        
+                        <div id="ayat-loading" class="absolute inset-0 bg-slate-900 flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-spinner fa-spin text-4xl text-ramadan-gold mb-4"></i>
+                                <p class="text-slate-400">جاري تحميل المصحف...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 flex gap-2">
+                        <a href="https://www.ayat.app" target="_blank" class="flex-1 py-3 bg-ramadan-green text-white rounded-xl text-center font-bold hover:bg-ramadan-green/80 transition-colors">
+                            <i class="fas fa-external-link-alt ml-2"></i> فتح في نافذة جديدة
+                        </a>
+                        <button onclick="refreshAyat()" class="px-6 py-3 bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition-colors">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sheikh Shanqiti Section -->
+            <div id="media-shanqiti" class="media-section hidden">
+                <div class="glass-panel rounded-3xl p-6 mb-6 border-2 border-shanqiti/30">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-shanqiti to-green-600 flex items-center justify-center text-white text-2xl">
+                            <i class="fas fa-microphone-lines"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-shanqiti">مقاطع مميزة عن رمضان</h3>
+                            <p class="text-slate-400">للشيخ محمد بن محمد المختار الشنقيطي حفظه الله</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 text-center">
+                        <i class="fas fa-headphones ml-2"></i>
+                        اضغط على أي مقطع للاستماع مباشرة
+                    </p>
+                </div>
+
+                <!-- Audio Player for Shanqiti -->
+                <div id="shanqiti-player" class="glass-panel rounded-2xl p-4 mb-6 hidden">
+                    <div class="flex items-center gap-4">
+                        <button onclick="stopShanqiti()" class="w-12 h-12 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fas fa-stop"></i>
+                        </button>
+                        <div class="flex-1">
+                            <h4 id="shanqiti-title" class="font-bold text-ramadan-gold mb-1"></h4>
+                            <div class="audio-progress">
+                                <div id="shanqiti-progress" class="audio-progress-bar"></div>
+                            </div>
+                        </div>
+                        <div class="flex gap-1 h-8 items-end">
+                            <div class="wave-bar h-4"></div>
+                            <div class="wave-bar h-6"></div>
+                            <div class="wave-bar h-8"></div>
+                            <div class="wave-bar h-5"></div>
+                            <div class="wave-bar h-3"></div>
+                        </div>
+                    </div>
+                    <audio id="shanqiti-audio" onended="onShanqitiEnded()" ontimeupdate="updateShanqitiProgress()"></audio>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="shanqiti-list">
+                    <!-- Audio items will be generated by JS -->
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button onclick="shareShanqitiList()" class="px-6 py-3 bg-gradient-to-r from-shanqiti to-green-600 text-white rounded-xl font-bold hover:shadow-lg transition-all">
+                        <i class="fas fa-share-nodes ml-2"></i> مشاركة القائمة
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cultural Content Section -->
+            <div id="media-cultural" class="media-section hidden">
+                <div class="glass-panel rounded-3xl p-6">
+                    <h3 class="text-ramadan-gold font-bold text-xl mb-6 flex items-center gap-2">
+                        <i class="fas fa-graduation-cap"></i> المحتوى الثقافي والدعوي
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-800/50 rounded-2xl p-4 border border-slate-700 hover:border-ramadan-gold transition-all group">
+                            <div class="w-12 h-12 rounded-xl bg-ramadan-gold/20 flex items-center justify-center text-ramadan-gold text-xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">قراءة كتاب</h4>
+                            <p class="text-sm text-slate-400 mb-4">نصف ساعة يومياً</p>
+                            <select onchange="markBookReading(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-sm text-slate-300">
+                                <option value="0">لم أقرأ</option>
+                                <option value="15">15 دقيقة</option>
+                                <option value="30">30 دقيقة (الهدف)</option>
+                                <option value="45">أكثر من 30</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-slate-800/50 rounded-2xl p-4 border border-slate-700 hover:border-ramadan-gold transition-all group">
+                            <div class="w-12 h-12 rounded-xl bg-ramadan-teal/20 flex items-center justify-center text-ramadan-teal text-xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">مشاهدة برنامج هادف</h4>
+                            <p class="text-sm text-slate-400 mb-4">برنامج سواعد الإخاء</p>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" onchange="toggleProgram()" class="w-5 h-5 accent-ramadan-teal rounded">
+                                <span class="text-sm">تم المشاهدة</span>
+                            </label>
+                        </div>
+
+                        <div class="bg-slate-800/50 rounded-2xl p-4 border border-slate-700 hover:border-ramadan-gold transition-all group">
+                            <div class="w-12 h-12 rounded-xl bg-ramadan-accent/20 flex items-center justify-center text-ramadan-accent text-xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">مشاركة فائدة</h4>
+                            <p class="text-sm text-slate-400 mb-4">بلغوا عني ولو آية</p>
+                            <button onclick="shareBenefit()" class="w-full py-2 bg-ramadan-accent/20 text-ramadan-accent rounded-lg text-sm hover:bg-ramadan-accent/30 transition-colors">
+                                <i class="fas fa-share ml-1"></i> مشاركة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Golden Tips Tab (الاقتراحات الذهبية) -->
+        <section id="tips-tab" class="tab-content hidden animate-slide-up">
+            <!-- Header Quote -->
+            <div class="quote-card rounded-3xl p-8 mb-8 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-ramadan-gold to-transparent"></div>
+                <i class="fas fa-quote-right text-4xl text-ramadan-gold/20 absolute top-4 right-4"></i>
+                <h2 class="text-2xl md:text-3xl font-bold gold-gradient-text mb-4 font-naskh leading-relaxed">
+                    عشرة اقتراحات لرمضان<br>
+                    <span class="text-lg text-ramadan-gold/70">لو طُبِّقت – بإذن الله – سيكون هذا الشهر من أفضل رمضاناتكم</span>
+                </h2>
+            </div>
+
+            <!-- Progress Overview for Tips -->
+            <div class="glass-panel rounded-3xl p-6 mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-ramadan-gold font-bold text-lg flex items-center gap-2">
+                        <i class="fas fa-chart-line"></i> تقدمك في الاقتراحات
+                    </h3>
+                    <span id="tips-progress-text" class="text-2xl font-bold text-ramadan-gold">0/10</span>
+                </div>
+                <div class="h-4 bg-slate-800 rounded-full overflow-hidden">
+                    <div id="tips-progress-bar" class="h-full bg-gradient-to-r from-ramadan-gold via-ramadan-accent to-ramadan-gold transition-all duration-700" style="width: 0%"></div>
+                </div>
+                <p class="text-sm text-slate-400 mt-3 text-center" id="tips-motivation">ابدأ رحلتك نحو رمضان مثالي!</p>
+            </div>
+
+            <!-- Tips Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                
+                <!-- Tip 1: الاعتذار ورد المظالم -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-1">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">1</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-ramadan-rose to-red-600 text-white shadow-lg shadow-red-500/30">
+                                <i class="fas fa-handshake-slash"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">الاعتذار وردّ المظالم</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    اكتب قائمة بكل من ظلمتهم:<br>
+                                    <span class="text-ramadan-gold">رد المظالم للأحياء وتصدق على الأموات</span>
+                                </p>
+                                <div class="bg-slate-800/50 rounded-xl p-3 mb-4">
+                                    <textarea class="w-full bg-transparent border-none text-sm text-slate-300 resize-none focus:outline-none" rows="2" placeholder="اكتب أسماء من ظلمته هنا..." onblur="saveTipNote(1, this.value)"></textarea>
+                                </div>
+                                <button onclick="toggleTip(1)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-ramadan-rose text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-1">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 2: التدبر لا كثرة القراءة -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-2">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">2</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-ramadan-teal to-cyan-600 text-white shadow-lg shadow-teal-500/30">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">التدبر لا كثرة القراءة</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    الفهم أهم من الكمية.<br>
+                                    <span class="text-ramadan-gold">"كِتَابٌ أَنزَلْنَاهُ إِلَيْكَ مُبَارَكٌ لِّيَدَّبَّرُوا آيَاتِهِ"</span>
+                                </p>
+                                <div class="flex gap-2 mb-4">
+                                    <div class="flex-1 bg-slate-800/50 rounded-lg p-3 text-center">
+                                        <span class="block text-2xl font-bold text-ramadan-teal" id="tadabbur-pages">0</span>
+                                        <span class="text-xs text-slate-400">صفحات بتدبر</span>
+                                    </div>
+                                    <button onclick="addTadabburPage()" class="px-4 bg-ramadan-teal/20 text-ramadan-teal rounded-lg hover:bg-ramadan-teal/30 transition-colors">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <button onclick="toggleTip(2)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-ramadan-teal text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-2">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 3: الصوم عن سيئات الأعمال -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-3">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">3</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30">
+                                <i class="fas fa-shield-heart"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">الصوم عن سيئات الأعمال</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    صم عن عمل سيئ ثلاثين يومًا:<br>
+                                    <span class="text-ramadan-gold">كالحسد، أو سوء الظن، أو التعلق المحرم</span>
+                                </p>
+                                <div class="space-y-2 mb-4">
+                                    <label class="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                        <input type="checkbox" class="accent-purple-500" onchange="updateBadHabitCheck(0)">
+                                        <span>الحسد</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                        <input type="checkbox" class="accent-purple-500" onchange="updateBadHabitCheck(1)">
+                                        <span>سوء الظن</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                        <input type="checkbox" class="accent-purple-500" onchange="updateBadHabitCheck(2)">
+                                        <span>تتبع العيوب</span>
+                                    </label>
+                                </div>
+                                <button onclick="toggleTip(3)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-purple-600 text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-3">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 4: الصوم عن وسائل التواصل -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-4">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">4</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/30">
+                                <i class="fas fa-mobile-screen-button"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">الصوم عن وسائل التواصل</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    امتنع يوميًا لعدة ساعات عن كل وسائل التواصل الاجتماعي<br>
+                                    <span class="text-ramadan-gold">حافظ على وقتك</span>
+                                </p>
+                                <div class="bg-slate-800/50 rounded-xl p-4 mb-4 text-center">
+                                    <div class="text-3xl font-bold text-blue-400 mb-1" id="social-free-hours">0</div>
+                                    <div class="text-xs text-slate-400">ساعات خالية من التواصل اليوم</div>
+                                </div>
+                                <div class="flex gap-2 mb-4">
+                                    <button onclick="addSocialFreeHour(1)" class="flex-1 py-2 bg-slate-700 rounded-lg text-sm hover:bg-blue-600/30 transition-colors">+1 ساعة</button>
+                                    <button onclick="addSocialFreeHour(2)" class="flex-1 py-2 bg-slate-700 rounded-lg text-sm hover:bg-blue-600/30 transition-colors">+2 ساعة</button>
+                                </div>
+                                <button onclick="toggleTip(4)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-blue-600 text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-4">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 5: صدقة كل يوم -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-5">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">5</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-ramadan-gold to-yellow-600 text-white shadow-lg shadow-yellow-500/30">
+                                <i class="fas fa-hand-holding-dollar"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">صدقة كل يوم</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    ضع يوميا مالًا في ظرف،<br>
+                                    <span class="text-ramadan-gold">تصدّق منه متى استطعت</span>
+                                </p>
+                                <div class="bg-slate-800/50 rounded-xl p-4 mb-4">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-slate-400">المبلغ اليومي</span>
+                                        <span class="text-ramadan-gold font-bold" id="daily-charity-amount">0 ريال</span>
+                                    </div>
+                                    <input type="range" min="0" max="100" value="0" oninput="updateCharityAmount(this.value)" class="w-full accent-ramadan-gold">
+                                </div>
+                                <button onclick="toggleTip(5)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-ramadan-gold text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-5">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 6: الفجر قبل التراويح -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-6">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">6</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-orange-500 to-red-500 text-white shadow-lg shadow-orange-500/30">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">الفجر قبل التراويح</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    الفجر في جماعة فرض، والتراويح سنة.<br>
+                                    <span class="text-ramadan-gold">وإن استطعت الجمع بينهما فذاك خير</span>
+                                </p>
+                                <div class="grid grid-cols-2 gap-3 mb-4">
+                                    <div class="bg-slate-800/50 rounded-xl p-3 text-center">
+                                        <i class="fas fa-mosque text-orange-400 text-xl mb-1"></i>
+                                        <div class="text-xs text-slate-400">صلاة الفجر</div>
+                                        <div class="text-sm font-bold text-white" id="fajr-streak">0 أيام</div>
+                                    </div>
+                                    <div class="bg-slate-800/50 rounded-xl p-3 text-center">
+                                        <i class="fas fa-moon text-blue-400 text-xl mb-1"></i>
+                                        <div class="text-xs text-slate-400">التراويح</div>
+                                        <div class="text-sm font-bold text-white" id="taraweeh-streak">0 ليالٍ</div>
+                                    </div>
+                                </div>
+                                <button onclick="toggleTip(6)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-orange-500 text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-6">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 7: العفو والسماح -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-7">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">7</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/30">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">العفو والسماح</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    سامح لله.. ليسامحك<br>
+                                    <span class="text-ramadan-gold font-naskh text-lg">"هَلْ جَزَاءُ الْإِحْسَانِ إِلَّا الْإِحْسَانُ"</span>
+                                </p>
+                                <div class="bg-slate-800/50 rounded-xl p-3 mb-4">
+                                    <textarea class="w-full bg-transparent border-none text-sm text-slate-300 resize-none focus:outline-none text-center" rows="2" placeholder="سامحتُ اليوم..." onblur="saveTipNote(7, this.value)"></textarea>
+                                </div>
+                                <button onclick="toggleTip(7)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-green-500 text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-7">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 8: التطوع بالجهد -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-8">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">8</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/30">
+                                <i class="fas fa-hands-holding-circle"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">التطوع بالجهد لا بالمال فقط</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    انزل بنفسك،<br>
+                                    <span class="text-ramadan-gold">وارفع عن الناس شيئًا من معاناتهم</span>
+                                </p>
+                                <div class="space-y-2 mb-4">
+                                    <label class="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                        <input type="checkbox" class="accent-cyan-500" onchange="updateVolunteerCheck(0)">
+                                        <span>مساعدة جار</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                        <input type="checkbox" class="accent-cyan-500" onchange="updateVolunteerCheck(1)">
+                                        <span>خدمة مسجد</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                        <input type="checkbox" class="accent-cyan-500" onchange="updateVolunteerCheck(2)">
+                                        <span>مساعدة محتاج</span>
+                                    </label>
+                                </div>
+                                <button onclick="toggleTip(8)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-cyan-500 text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-8">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 9: أحسن إفطارك -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-9">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">9</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-lime-500 to-green-600 text-white shadow-lg shadow-lime-500/30">
+                                <i class="fas fa-apple-whole"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">أحسن إفطارك</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    ليكون صحيا،<br>
+                                    <span class="text-ramadan-gold">جسدك أمانة، وإصلاحه عبادة</span>
+                                </p>
+                                <div class="grid grid-cols-3 gap-2 mb-4">
+                                    <button onclick="markHealthyFood('dates')" class="food-btn py-2 bg-slate-800 rounded-lg text-xs hover:bg-lime-600/30 transition-colors border border-slate-700" data-food="dates">
+                                        <i class="fas fa-cookie text-lime-400 mb-1 block"></i> تمر
+                                    </button>
+                                    <button onclick="markHealthyFood('water')" class="food-btn py-2 bg-slate-800 rounded-lg text-xs hover:bg-lime-600/30 transition-colors border border-slate-700" data-food="water">
+                                        <i class="fas fa-glass-water text-blue-400 mb-1 block"></i> ماء
+                                    </button>
+                                    <button onclick="markHealthyFood('balanced')" class="food-btn py-2 bg-slate-800 rounded-lg text-xs hover:bg-lime-600/30 transition-colors border border-slate-700" data-food="balanced">
+                                        <i class="fas fa-bowl-food text-green-400 mb-1 block"></i> طعام متوازن
+                                    </button>
+                                </div>
+                                <button onclick="toggleTip(9)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-lime-500 text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-9">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 10: أسماء الله الحسنى -->
+                <div class="tip-card rounded-3xl p-6 relative tip-3d-container" id="tip-10">
+                    <div class="tip-3d-card">
+                        <span class="tip-number">10</span>
+                        <div class="flex items-start gap-4">
+                            <div class="tip-icon bg-gradient-to-br from-ramadan-purple to-purple-800 text-white shadow-lg shadow-purple-500/30">
+                                <i class="fas fa-sparkles"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">كن عبدًا لاسم من أسماء الله الحسنى</h3>
+                                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                    اختر كل يوم اسمًا واحدًا وتأمل فيه.<br>
+                                    <span class="text-ramadan-gold">عِش مع هذا الاسم طوال الشهر</span>
+                                </p>
+                                <div class="bg-slate-800/50 rounded-xl p-4 mb-4">
+                                    <label class="block text-sm text-slate-400 mb-2">اسم اليوم:</label>
+                                    <select onchange="selectNameOfAllah(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-ramadan-gold font-bold text-center">
+                                        <option value="">اختر اسمًا</option>
+                                        <option value="الرحمن">الرحمن</option>
+                                        <option value="الرحيم">الرحيم</option>
+                                        <option value="الملك">الملك</option>
+                                        <option value="القدوس">القدوس</option>
+                                        <option value="السلام">السلام</option>
+                                        <option value="المؤمن">المؤمن</option>
+                                        <option value="المهيمن">المهيمن</option>
+                                        <option value="العزيز">العزيز</option>
+                                        <option value="الجبار">الجبار</option>
+                                        <option value="المتكبر">المتكبر</option>
+                                        <option value="الخالق">الخالق</option>
+                                        <option value="البارئ">البارئ</option>
+                                        <option value="المصور">المصور</option>
+                                        <option value="الغفار">الغفار</option>
+                                        <option value="القهار">القهار</option>
+                                        <option value="الوهاب">الوهاب</option>
+                                        <option value="الرزاق">الرزاق</option>
+                                        <option value="الفتاح">الفتاح</option>
+                                        <option value="العليم">العليم</option>
+                                        <option value="القابض">القابض</option>
+                                        <option value="الباسط">الباسط</option>
+                                        <option value="الخافض">الخافض</option>
+                                        <option value="الرافع">الرافع</option>
+                                        <option value="المعز">المعز</option>
+                                        <option value="المذل">المذل</option>
+                                        <option value="السميع">السميع</option>
+                                        <option value="البصير">البصير</option>
+                                        <option value="الحكم">الحكم</option>
+                                        <option value="العدل">العدل</option>
+                                        <option value="اللطيف">اللطيف</option>
+                                    </select>
+                                    <div id="name-meaning" class="mt-3 text-sm text-slate-300 text-center hidden"></div>
+                                </div>
+                                <button onclick="toggleTip(10)" class="check-btn w-full py-3 rounded-xl bg-slate-700 hover:bg-purple-600 text-white font-bold transition-all flex items-center justify-center gap-2" id="btn-tip-10">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>تحقق</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Closing Dua -->
+            <div class="glass-panel rounded-3xl p-8 text-center border-2 border-ramadan-gold/30 bg-gradient-to-b from-ramadan-gold/5 to-transparent">
+                <i class="fas fa-praying-hands text-5xl text-ramadan-gold/30 mb-4 block"></i>
+                <h3 class="text-2xl font-bold gold-gradient-text mb-4 font-naskh">وفي الختام</h3>
+                <p class="text-slate-300 mb-6 leading-relaxed">
+                    نسأل الله أن يكون رمضان شهر تحوّل للأفضل<br>
+                    <span class="text-ramadan-gold font-naskh text-xl block mt-4">
+                        اللهم يا مُحوِّل الحال والأحوال، حوّل حالنا إلى أحسن حال
+                    </span>
+                </p>
+                <button onclick="shareTips()" class="px-8 py-4 bg-gradient-to-r from-ramadan-gold to-ramadan-accent text-ramadan-darker font-bold rounded-2xl hover:shadow-lg hover:shadow-ramadan-gold/30 transition-all">
+                    <i class="fas fa-share-nodes ml-2"></i> شارك الاقتراحات مع الآخرين
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-slate-500 text-sm pb-8">
+            <div class="glass-panel rounded-2xl p-6 mb-4 inline-block max-w-2xl w-full">
+                <p class="mb-2 font-naskh text-lg text-ramadan-gold/80">"مَنْ عَمِلَ صَالِحًا مِّن ذَكَرٍ أَوْ أُنثَىٰ وَهُوَ مُؤْمِنٌ فَلَنُحْيِيَنَّهُ حَيَاةً طَيِّبَةً"</p>
+                <p class="text-xs text-slate-600">محراب رمضان 1447 - تطبيق ويب تفاعلي لإدارة الشهر الكريم</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Focus Mode Overlay -->
+    <div id="focus-mode" class="fixed inset-0 bg-ramadan-darker/95 z-[100] hidden flex items-center justify-center">
+        <div class="text-center p-8">
+            <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-ramadan-gold/20 flex items-center justify-center animate-pulse">
+                <i class="fas fa-moon text-6xl text-ramadan-gold"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-ramadan-gold mb-4 font-naskh">وضع التركيز</h2>
+            <p class="text-slate-400 mb-8 max-w-md mx-auto">تم تفعيل وضع العبادة المعمقة. لن تظهر أي إشعارات أو تشتتات. اغتنم الوقت.</p>
+            <div class="text-6xl font-bold text-white mb-8 font-mono" id="focus-timer">00:00</div>
+            <button onclick="deactivateFocusMode()" class="px-8 py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-colors">
+                إيقاف وضع التركيز
+            </button>
+        </div>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div id="celebration-modal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl p-8 max-w-md w-full text-center border-2 border-ramadan-gold transform scale-95 transition-transform" id="celebration-content">
+            <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-ramadan-gold to-ramadan-accent flex items-center justify-center text-4xl text-ramadan-darker animate-bounce">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2 class="text-3xl font-bold gold-gradient-text mb-4 font-naskh">مبارك!</h2>
+            <p class="text-slate-300 mb-6">لقد حققت <span id="celebration-score" class="text-ramadan-gold font-bold text-2xl"></span>% من نقاط اليوم</p>
+            <p id="celebration-message" class="text-sm text-slate-400 mb-6"></p>
+            <button onclick="closeCelebration()" class="w-full py-4 bg-gradient-to-r from-ramadan-gold to-ramadan-accent text-ramadan-darker font-bold rounded-2xl hover:shadow-lg hover:shadow-ramadan-gold/30 transition-all">
+                الحمد لله
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Application State
+        const state = {
+            currentDay: 1,
+            currentMonth: new Date().getMonth(),
+            ramadanData: {},
+            tipsData: {
+                completed: [],
+                notes: {},
+                tadabburPages: 0,
+                badHabits: [false, false, false],
+                socialFreeHours: 0,
+                charityAmount: 0,
+                fajrStreak: 0,
+                taraweehStreak: 0,
+                volunteerChecks: [false, false, false],
+                healthyFood: [],
+                todaysName: ''
+            },
+            currentTab: 'dashboard',
+            currentMediaTab: 'radio',
+            radioPlaying: false,
+            focusMode: false,
+            isDarkTheme: true,
+            currentShanqiti: null,
+            weights: {
+                prayers: 40,
+                sunnah: 15,
+                duha: 10,
+                taraweeh: 15,
+                qiyam: 10,
+                witr: 5,
+                quran: 20,
+                memorization: 5,
+                athkar: 5,
+                social: 10,
+                weekly: 10,
+                charity: 5,
+                media: 5
+            }
+        };
+
+        // Sheikh Shanqiti Audio List
+const shanqitiAudios = [
+    { id: 1, title: 'أسعد الناس في رمضان', url: 'http://www.shanqiti.com/lessons/nLniU0JJiqorsNGqXc2M.mp3', duration: '05:10' },
+    { id: 2, title: 'رمضان وعزيمة الرجال', url: 'http://www.shanqiti.com/lessons/smQBiyJSyyQWWsgMipMj.mp3', duration: '10:54' },
+    { id: 3, title: 'رمضان والشعور العجيب', url: 'http://www.shanqiti.com/lessons/0folQyS2xwMjn5fhAJzt.mp3', duration: '05:21' },
+    { id: 4, title: 'استشعار فوات الفرصة', url: 'http://www.shanqiti.com/lessons/XccS0IoUmSUJESAcCvku.mp3', duration: '01:38' },
+    { id: 5, title: 'أعظم ما يوفق له العبد في رمضان', url: 'http://shanqiti.com/lessons/ThpliMnLwHbiy5B5SmEf.mp3', duration: '04:53' },
+    { id: 6, title: 'فتور في رمضان', url: 'http://www.shanqiti.com/lessons/H1ylBl4vx5sZuWBbgI4r.mp3', duration: '13:12' },
+    { id: 7, title: 'رمضان وإعادة النظر في القول والفعل', url: 'http://www.shanqiti.com/lessons/yJp0sQCMCYBwh1TxYnJi.mp3', duration: '08:49' },
+    { id: 8, title: 'معينات التعبد في رمضان', url: 'http://www.shanqiti.com/lessons/Wzl02Gm5rBLfBLuDBn3a.mp3', duration: '09:44' },
+    { id: 9, title: 'الصيام الكامل والناقص', url: 'http://www.shanqiti.com/lessons/41QnreVaCMDDOsWE4Txr.mp3', duration: '07:36' },
+    { id: 10, title: 'لمن أراد الاعتكاف', url: 'http://www.shanqiti.com/lessons/n2UEWVKpRhZkyHsrVXgc.mp3', duration: '16:43' },
+    { id: 11, title: 'ماذا بعد رمضان', url: 'http://www.shanqiti.com/lessons/3BKN11kgSmyupgwkJ3Fv.mp3', duration: '20:23' },
+    { id: 12, title: 'استشعار نعم الله في رمضان', url: 'http://www.shanqiti.com/lessons/nTdpcYhhmLDeXWI2DUVi.mp3', duration: '10:38' },
+    { id: 13, title: 'قرب ينبغي للمعتكف الاشتغال بها', url: 'http://shanqiti.com/lessons/R5AZywwokBbVnZzA2fj2.mp3', duration: '22:30' },
+    { id: 14, title: 'مدرسة الاعتكاف', url: 'http://shanqiti.com/lessons/E2ZVkTxyBynArRGxVbiW.mp3', duration: '54:10' },
+    { id: 15, title: 'دروس من مدرسة الصيام', url: 'http://shanqiti.com/lessons/VuCPoUA1CyKYfObaBaZ3.MP3', duration: '59:35' }
+];
+
+        // Ramadan 1447 starts on Wednesday, February 18, 2026
+        const RAMADAN_START_DATE = new Date(2026, 1, 18);
+
+        // Calculate current Ramadan day
+        function calculateRamadanDay() {
+            const today = new Date();
+            const diffTime = today - RAMADAN_START_DATE;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            
+            if (diffDays < 1) return 1;
+            if (diffDays > 30) return 30;
+            return diffDays;
+        }
+
+        // Names of Allah meanings
+        const namesOfAllah = {
+            'الرحمن': 'ذو الرحمة الواسعة لجميع الخلق',
+            'الرحيم': 'المتخصص برحمته للمؤمنين',
+            'الملك': 'مالك الملك والسيادة الكاملة',
+            'القدوس': 'الطاهر المنزه عن كل نقص',
+            'السلام': 'المصدر للسلامة والسلام',
+            'المؤمن': 'المعطي للأمن والإيمان',
+            'المهيمن': 'الرقيب الحافظ لكل شيء',
+            'العزيز': 'الغالب الذي لا يُقهر',
+            'الجبار': 'المتكبر على خلقه بعظمته',
+            'المتكبر': 'الذي له الكبرياء والعظمة',
+            'الخالق': 'المبدع الموجد من العدم',
+            'البارئ': 'المصور الخلق على غير مثال',
+            'المصور': 'المعطي لكل خلق صورة',
+            'الغفار': 'الستار لذنوب عباده',
+            'القهار': 'الذي قهر كل شيء بعزته',
+            'الوهاب': 'المعطي بلا مقابل ولا حد',
+            'الرزاق': 'المعطي للرزق لجميع الخلق',
+            'الفتاح': 'الفاتح لما أغلق على عباده',
+            'العليم': 'الذي يعلم كل شيء',
+            'القابض': 'الذي يقبض الرزق والأرواح',
+            'الباسط': 'الذي يبسط الرزق والرحمة',
+            'الخافض': 'الذي يخفض الظالمين',
+            'الرافع': 'الذي يرفع المؤمنين بالطاعة',
+            'المعز': 'المعطي للعزة لمن يشاء',
+            'المذل': 'الذي يذل الكافرين',
+            'السميع': 'الذي يسمع كل شيء',
+            'البصير': 'الذي يرى كل شيء',
+            'الحكم': 'الذي يحكم بأمره',
+            'العدل': 'الذي لا يجور أبدًا',
+            'اللطيف': 'البر بعباده والرفيق بهم'
+        };
+
+        // Surah page counts
+        const surahPages = {
+            1: 1, 2: 48, 3: 26, 4: 32, 5: 28, 6: 22, 7: 25, 8: 10, 9: 21, 10: 17,
+            11: 18, 12: 13, 13: 7, 14: 7, 15: 6, 16: 14, 17: 12, 18: 12, 19: 8, 20: 10,
+            21: 10, 22: 10, 23: 9, 24: 10, 25: 6, 26: 9, 27: 8, 28: 11, 29: 8, 30: 6
+        };
+
+        // Initialize Data Structure
+        function initializeDay(day) {
+            if (!state.ramadanData[day]) {
+                state.ramadanData[day] = {
+                    prayers: { fajr: false, dhuhr: false, asr: false, maghrib: false, isha: false, takbeer: {} },
+                    sunnah: 0,
+                    duha: 0,
+                    taraweeh: 0,
+                    qiyam: 0,
+                    witr: false,
+                    quran: 0,
+                    quranRange: { fromSurah: 1, fromAyah: 1, toSurah: 2, toAyah: 286 },
+                    memorization: false,
+                    athkar: { morning: false, evening: false },
+                    accounting: false,
+                    duas: ['', ''],
+                    social: { parents: false, family_session: false, children_follow: false, charity: false },
+                    weekly: { friends: [false, false, false, false], lessons: [false, false, false, false], brotherhood: [false, false, false, false], iftar: [false, false, false, false] },
+                    advice: 0,
+                    media: { book: 0, program: false },
+                    score: 0,
+                    completed: false
+                };
+            }
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            state.isDarkTheme = !state.isDarkTheme;
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (state.isDarkTheme) {
+                html.classList.remove('light-theme');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                html.classList.add('light-theme');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+            
+            localStorage.setItem('ramadan1447_theme', state.isDarkTheme ? 'dark' : 'light');
+        }
+
+        // Tab Switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.add('bg-ramadan-gold/20', 'text-ramadan-gold', 'border-ramadan-gold/30');
+                    btn.classList.remove('text-slate-400');
+                } else {
+                    btn.classList.remove('bg-ramadan-gold/20', 'text-ramadan-gold', 'border-ramadan-gold/30');
+                    btn.classList.add('text-slate-400');
+                }
+            });
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(`${tabName}-tab`).classList.remove('hidden');
+            
+            state.currentTab = tabName;
+            
+            if (tabName === 'dashboard') {
+                updateDashboard();
+            } else if (tabName === 'tips') {
+                updateTipsProgress();
+            } else if (tabName === 'media') {
+                renderShanqitiList();
+            }
+        }
+
+        // Media Sub-tab Switching
+        function switchMediaTab(mediaTab) {
+            document.querySelectorAll('.media-sub-btn').forEach(btn => {
+                if (btn.dataset.media === mediaTab) {
+                    btn.classList.add('bg-ramadan-gold/20', 'text-ramadan-gold', 'border-ramadan-gold/30');
+                    btn.classList.remove('text-slate-400');
+                } else {
+                    btn.classList.remove('bg-ramadan-gold/20', 'text-ramadan-gold', 'border-ramadan-gold/30');
+                    btn.classList.add('text-slate-400');
+                }
+            });
+
+            document.querySelectorAll('.media-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(`media-${mediaTab}`).classList.remove('hidden');
+            
+            state.currentMediaTab = mediaTab;
+        }
+
+        // Sheikh Shanqiti Functions
+        function renderShanqitiList() {
+            const container = document.getElementById('shanqiti-list');
+            if (!container || container.children.length > 0) return;
+            
+            container.innerHTML = shanqitiAudios.map((audio, index) => `
+                <div class="audio-card rounded-2xl p-4 flex items-center gap-4 cursor-pointer" id="shanqiti-${audio.id}" onclick="playShanqiti(${audio.id})">
+                    <div class="play-btn flex-shrink-0" id="play-btn-${audio.id}">
+                        <i class="fas fa-play ml-1"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-white mb-1 truncate">${audio.title}</h4>
+                        <div class="flex items-center gap-3 text-xs text-slate-400">
+                            <span><i class="fas fa-clock ml-1"></i>${audio.duration}</span>
+                            <span><i class="fas fa-user ml-1"></i>الشيخ الشنقيطي</span>
+                        </div>
+                    </div>
+                    <a href="${audio.url}" target="_blank" class="p-2 text-slate-400 hover:text-ramadan-gold transition-colors" onclick="event.stopPropagation()">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        function playShanqiti(id) {
+            const audio = shanqitiAudios.find(a => a.id === id);
+            if (!audio) return;
+            
+            const player = document.getElementById('shanqiti-player');
+            const audioEl = document.getElementById('shanqiti-audio');
+            const titleEl = document.getElementById('shanqiti-title');
+            
+            // Stop current if playing different
+            if (state.currentShanqiti && state.currentShanqiti !== id) {
+                stopShanqiti();
+            }
+            
+            // Toggle play/pause
+            if (state.currentShanqiti === id && !audioEl.paused) {
+                audioEl.pause();
+                document.getElementById(`play-btn-${id}`).innerHTML = '<i class="fas fa-play ml-1"></i>';
+                document.getElementById(`shanqiti-${id}`).classList.remove('playing');
+                return;
+            }
+            
+            // Play new
+            state.currentShanqiti = id;
+            audioEl.src = audio.url;
+            audioEl.play().catch(e => console.log('Audio play failed:', e));
+            
+            titleEl.textContent = audio.title;
+            player.classList.remove('hidden');
+            
+            // Update UI
+            document.querySelectorAll('.audio-card').forEach(card => card.classList.remove('playing'));
+            document.getElementById(`shanqiti-${id}`).classList.add('playing');
+            document.querySelectorAll('.play-btn').forEach(btn => btn.innerHTML = '<i class="fas fa-play ml-1"></i>');
+            document.getElementById(`play-btn-${id}`).innerHTML = '<i class="fas fa-pause"></i>';
+        }
+
+        function stopShanqiti() {
+            const audioEl = document.getElementById('shanqiti-audio');
+            audioEl.pause();
+            audioEl.currentTime = 0;
+            
+            document.getElementById('shanqiti-player').classList.add('hidden');
+            
+            if (state.currentShanqiti) {
+                document.getElementById(`shanqiti-${state.currentShanqiti}`).classList.remove('playing');
+                document.getElementById(`play-btn-${state.currentShanqiti}`).innerHTML = '<i class="fas fa-play ml-1"></i>';
+            }
+            
+            state.currentShanqiti = null;
+        }
+
+        function updateShanqitiProgress() {
+            const audioEl = document.getElementById('shanqiti-audio');
+            const progress = (audioEl.currentTime / audioEl.duration) * 100;
+            document.getElementById('shanqiti-progress').style.width = `${progress}%`;
+        }
+
+        function onShanqitiEnded() {
+            if (state.currentShanqiti) {
+                const currentIndex = shanqitiAudios.findIndex(a => a.id === state.currentShanqiti);
+                const nextAudio = shanqitiAudios[currentIndex + 1];
+                if (nextAudio) {
+                    playShanqiti(nextAudio.id);
+                } else {
+                    stopShanqiti();
+                }
+            }
+        }
+
+        function shareShanqitiList() {
+            const text = `مقاطع مميزة عن رمضان للشيخ محمد المختار الشنقيطي:\n\n` +
+                shanqitiAudios.map(a => `${a.id}. ${a.title}`).join('\n') +
+                `\n\nتطبيق محراب رمضان 1447`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'مقاطع الشيخ الشنقيطي عن رمضان',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(text);
+                alert('تم نسخ قائمة المقاطع!');
+            }
+        }
+
+        // Prayer Functions
+        function togglePrayer(checkbox, prayer) {
+            const data = state.ramadanData[state.currentDay];
+            data.prayers[prayer] = checkbox.checked;
+            
+            if (checkbox.checked) {
+                playSuccessSound();
+                celebrateSmall();
+            }
+            
+            updatePrayerScore(prayer);
+            calculateScore();
+        }
+
+        function toggleTakbeer(checkbox, prayer) {
+            const data = state.ramadanData[state.currentDay];
+            if (!data.prayers.takbeer) data.prayers.takbeer = {};
+            data.prayers.takbeer[prayer] = checkbox.checked;
+            
+            updatePrayerScore(prayer);
+            calculateScore();
+            
+            if (checkbox.checked) {
+                playSuccessSound();
+            }
+        }
+
+        function updatePrayerScore(prayer) {
+            const data = state.ramadanData[state.currentDay];
+            const prayerEl = document.querySelector(`[data-prayer="${prayer}"]`);
+            const scoreEl = prayerEl.querySelector('.prayer-score');
+            
+            let score = 0;
+            if (data.prayers[prayer]) score += 6;
+            if (data.prayers.takbeer && data.prayers.takbeer[prayer]) score += 2;
+            
+            scoreEl.textContent = score;
+            scoreEl.className = `text-2xl font-bold ${score > 0 ? 'text-ramadan-gold' : 'text-slate-600'} prayer-score`;
+        }
+
+        function adjustSunnah(delta) {
+            const data = state.ramadanData[state.currentDay];
+            data.sunnah = Math.max(0, Math.min(12, data.sunnah + delta));
+            document.getElementById('sunnah-count').textContent = data.sunnah;
+            document.getElementById('sunnah-progress').style.width = `${(data.sunnah / 12) * 100}%`;
+            calculateScore();
+        }
+
+        function setDuha(value) {
+            const data = state.ramadanData[state.currentDay];
+            data.duha = value;
+            document.querySelectorAll('.duha-btn').forEach(btn => {
+                if (parseInt(btn.dataset.value) === value) {
+                    btn.classList.add('bg-ramadan-gold', 'text-ramadan-darker', 'border-ramadan-gold');
+                    btn.classList.remove('bg-slate-800', 'border-transparent');
+                } else {
+                    btn.classList.remove('bg-ramadan-gold', 'text-ramadan-darker', 'border-ramadan-gold');
+                    btn.classList.add('bg-slate-800', 'border-transparent');
+                }
+            });
+            calculateScore();
+        }
+
+        function updateTaraweeh(value) {
+            const data = state.ramadanData[state.currentDay];
+            data.taraweeh = parseInt(value);
+            document.getElementById('taraweeh-value').textContent = value;
+            calculateScore();
+        }
+
+        function updateQiyam(value) {
+            const data = state.ramadanData[state.currentDay];
+            data.qiyam = value === 'more' ? 10 : parseInt(value);
+            calculateScore();
+        }
+
+        function toggleWitr(checkbox) {
+            const data = state.ramadanData[state.currentDay];
+            data.witr = checkbox.checked;
+            if (checkbox.checked) {
+                playSuccessSound();
+            }
+            calculateScore();
+        }
+
+        // Quran Functions
+// ==================== Quran Data ====================
+// Number of Ayat per Surah (index = surah number, 1-based)
+const ayahCount = [
+    0, // placeholder
+    7, 286, 200, 176, 120, 165, 206, 75, 129, 109, 123, 111, 43, 52, 99, 128, 111, 110, 98, 135,
+    112, 78, 118, 64, 77, 227, 93, 88, 69, 60, 34, 30, 73, 54, 45, 83, 182, 88, 75, 85,
+    54, 53, 89, 59, 37, 35, 38, 29, 18, 45, 60, 49, 62, 55, 78, 96, 29, 22, 24, 13,
+    14, 11, 11, 18, 12, 12, 30, 52, 52, 44, 28, 28, 20, 56, 40, 31, 50, 40, 46, 42,
+    29, 19, 36, 25, 22, 17, 19, 26, 30, 20, 15, 21, 11, 8, 8, 19, 5, 8, 8, 11,
+    11, 8, 3, 9, 5, 4, 7, 3, 6, 3, 5, 4, 5, 6
+];
+
+// Starting page of each Surah in the Madani Mushaf (15-line, 604 pages)
+// Index: surah number, value = page number where the surah begins
+// surahStartPage[115] = 605 (fictitious page after last surah) for easy calculation
+const surahStartPage = [
+    0,   // placeholder
+    1, 2, 50, 77, 106, 128, 151, 177, 187, 208, 221, 235, 249, 255, 262, 267, 282, 293, 305, 312,
+    322, 332, 342, 350, 359, 367, 377, 385, 396, 404, 411, 415, 418, 428, 434, 440, 446, 453, 458, 467,
+    477, 483, 489, 496, 499, 502, 507, 511, 515, 518, 520, 523, 526, 528, 531, 534, 537, 541, 545, 549,
+    551, 553, 554, 556, 558, 560, 562, 564, 566, 568, 570, 572, 574, 575, 577, 578, 580, 582, 583, 585,
+    586, 587, 587, 589, 590, 591, 591, 592, 593, 594, 595, 595, 596, 596, 597, 597, 598, 598, 599, 599,
+    600, 600, 601, 601, 601, 602, 602, 602, 603, 603, 603, 604, 604, 604, 605  // index 115 = 605
+];
+
+// ==================== Helper Functions ====================
+
+// Update max attribute of ayah inputs based on selected surah
+function updateAyahLimits() {
+    const fromSurah = parseInt(document.getElementById('from-surah').value);
+    const toSurah = parseInt(document.getElementById('to-surah').value);
+    
+    const fromAyahInput = document.getElementById('from-ayah');
+    const toAyahInput = document.getElementById('to-ayah');
+    
+    fromAyahInput.max = ayahCount[fromSurah];
+    toAyahInput.max = ayahCount[toSurah];
+    
+    // Ensure current values are within bounds
+    if (parseInt(fromAyahInput.value) > ayahCount[fromSurah]) {
+        fromAyahInput.value = ayahCount[fromSurah];
+    }
+    if (parseInt(toAyahInput.value) > ayahCount[toSurah]) {
+        toAyahInput.value = ayahCount[toSurah];
+    }
+}
+
+// Estimate the page number for a given surah and ayah
+function getPageNumber(surah, ayah) {
+    if (surah < 1 || surah > 114) return 1;
+    const startPage = surahStartPage[surah];
+    const endPage = surahStartPage[surah + 1] - 1; // last page of this surah
+    const totalAyah = ayahCount[surah];
+    // Linear interpolation: page = startPage + floor( (ayah-1) * pagesInSurah / totalAyah )
+    const pagesInSurah = endPage - startPage + 1;
+    const offset = Math.floor((ayah - 1) * pagesInSurah / totalAyah);
+    return startPage + offset;
+}
+
+// Main function called when range changes
+function updateReadingRange() {
+    // Update limits first
+    updateAyahLimits();
+    
+    const fromSurah = parseInt(document.getElementById('from-surah').value);
+    const toSurah = parseInt(document.getElementById('to-surah').value);
+    let fromAyah = parseInt(document.getElementById('from-ayah').value);
+    let toAyah = parseInt(document.getElementById('to-ayah').value);
+    
+    // Validate
+    if (isNaN(fromAyah) || fromAyah < 1) fromAyah = 1;
+    if (isNaN(toAyah) || toAyah < 1) toAyah = ayahCount[toSurah];
+    if (fromSurah === toSurah && fromAyah > toAyah) {
+        // swap if needed
+        [fromAyah, toAyah] = [toAyah, fromAyah];
+        document.getElementById('from-ayah').value = fromAyah;
+        document.getElementById('to-ayah').value = toAyah;
+    }
+    
+    // Save to state (if state object exists)
+    if (typeof state !== 'undefined' && state.ramadanData && state.ramadanData[state.currentDay]) {
+        state.ramadanData[state.currentDay].quranRange = { fromSurah, fromAyah, toSurah, toAyah };
+    }
+    
+    // Calculate pages using page numbers
+    const startPage = getPageNumber(fromSurah, fromAyah);
+    const endPage = getPageNumber(toSurah, toAyah);
+    let pages = endPage - startPage + 1;
+    if (pages < 1) pages = 1; // at least one page
+    
+    document.getElementById('range-result').textContent = `تقريباً ${pages} صفحة`;
+    
+    // Auto-add pages if user confirms
+    if (confirm(`هل تريد إضافة ${pages} صفحات إلى وردك اليومي؟`)) {
+        // Assuming addPages function exists
+        if (typeof addPages === 'function') {
+            addPages(pages);
+        }
+    }
+}
+
+// Attach event listeners to update limits when surah changes
+document.addEventListener('DOMContentLoaded', function() {
+    const fromSurahSelect = document.getElementById('from-surah');
+    const toSurahSelect = document.getElementById('to-surah');
+    
+    fromSurahSelect.addEventListener('change', function() {
+        updateAyahLimits();
+        // Optionally set to-ayah max based on toSurah, but we'll keep as is
+    });
+    
+    toSurahSelect.addEventListener('change', function() {
+        updateAyahLimits();
+    });
+    
+    // Initial call to set limits
+    updateAyahLimits();
+});
+
+
+        function addPages(count) {
+            const data = state.ramadanData[state.currentDay];
+            data.quran = Math.min(30, data.quran + count);
+            updateQuranUI();
+            calculateScore();
+            
+            if (data.quran === 30) {
+                celebrateAchievement();
+            }
+        }
+
+        function setManualPages() {
+            const input = document.getElementById('manual-pages');
+            const value = parseInt(input.value) || 0;
+            const data = state.ramadanData[state.currentDay];
+            data.quran = Math.min(30, Math.max(0, value));
+            updateQuranUI();
+            calculateScore();
+        }
+
+        function updateQuranUI() {
+            const data = state.ramadanData[state.currentDay];
+            document.getElementById('pages-read-display').textContent = `${data.quran} / 30 صفحة`;
+            document.getElementById('reading-progress').style.width = `${(data.quran / 30) * 100}%`;
+        }
+
+        function markMemorization(done) {
+            const data = state.ramadanData[state.currentDay];
+            data.memorization = done;
+            calculateScore();
+            if (done) playSuccessSound();
+        }
+
+        function toggleAthkar(time) {
+            const data = state.ramadanData[state.currentDay];
+            data.athkar[time] = !data.athkar[time];
+            calculateScore();
+        }
+
+        function toggleAccounting() {
+            const data = state.ramadanData[state.currentDay];
+            data.accounting = !data.accounting;
+            calculateScore();
+            if (data.accounting) {
+                checkBestDay();
+            }
+        }
+
+        function saveDua(input, index) {
+            const data = state.ramadanData[state.currentDay];
+            data.duas[index] = input.value;
+        }
+
+        // Social Functions
+        function toggleSocial(type) {
+            const data = state.ramadanData[state.currentDay];
+            data.social[type] = !data.social[type];
+            calculateScore();
+        }
+
+        function toggleWeekly(type, index) {
+            const data = state.ramadanData[state.currentDay];
+            data.weekly[type][index] = !data.weekly[type][index];
+            
+            const btn = document.querySelectorAll(`#${type === 'friends' ? 'friend-visits' : type === 'lessons' ? 'lessons-given' : type === 'brotherhood' ? 'brotherhood-visits' : 'iftar-count'} .weekly-btn`)[index];
+            
+            if (data.weekly[type][index]) {
+                btn.classList.add('bg-ramadan-teal', 'text-white');
+                btn.classList.remove('bg-slate-700');
+                playSuccessSound();
+            } else {
+                btn.classList.remove('bg-ramadan-teal', 'text-white');
+                btn.classList.add('bg-slate-700');
+            }
+            
+            calculateScore();
+        }
+
+        function setAdvice(count) {
+            const data = state.ramadanData[state.currentDay];
+            data.advice = count;
+            
+            document.querySelectorAll('.advice-btn').forEach(btn => {
+                const btnCount = parseInt(btn.dataset.count);
+                if (btnCount <= count) {
+                    btn.classList.add('bg-ramadan-accent', 'text-white', 'border-ramadan-accent');
+                    btn.classList.remove('bg-slate-800', 'border-slate-700');
+                } else {
+                    btn.classList.remove('bg-ramadan-accent', 'text-white', 'border-ramadan-accent');
+                    btn.classList.add('bg-slate-800', 'border-slate-700');
+                }
+            });
+            
+            calculateScore();
+        }
+
+        // Media Functions
+        function toggleRadio() {
+            const audio = document.getElementById('quran-radio');
+            const btn = document.getElementById('play-btn');
+            const visualizer = document.getElementById('radio-visualizer');
+            
+            if (state.radioPlaying) {
+                audio.pause();
+                btn.innerHTML = '<i class="fas fa-play ml-1"></i>';
+                visualizer.classList.remove('animate-pulse');
+                state.radioPlaying = false;
+            } else {
+                audio.play().catch(e => console.log('Audio play failed:', e));
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                visualizer.classList.add('animate-pulse');
+                state.radioPlaying = true;
+                
+                let progress = 0;
+                setInterval(() => {
+                    if (state.radioPlaying) {
+                        progress = (progress + 1) % 100;
+                        document.getElementById('audio-progress').style.width = `${progress}%`;
+                    }
+                }, 1000);
+            }
+        }
+
+        function changeStation(url, name) {
+            const audio = document.getElementById('quran-radio');
+            audio.src = url;
+            document.getElementById('current-station').textContent = name;
+            if (state.radioPlaying) {
+                audio.play();
+            }
+        }
+
+        function refreshAyat() {
+            const frame = document.getElementById('ayat-frame');
+            const loading = document.getElementById('ayat-loading');
+            loading.classList.remove('hidden');
+            frame.src = frame.src;
+            setTimeout(() => {
+                loading.classList.add('hidden');
+            }, 2000);
+        }
+
+        function markBookReading(minutes) {
+            const data = state.ramadanData[state.currentDay];
+            data.media.book = parseInt(minutes);
+            calculateScore();
+        }
+
+        function toggleProgram() {
+            const data = state.ramadanData[state.currentDay];
+            data.media.program = !data.media.program;
+            calculateScore();
+        }
+
+        function shareBenefit() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'محراب رمضان 1447',
+                    text: 'شارك في نشر الخير هذا الشهر الكريم',
+                    url: window.location.href
+                });
+            } else {
+                alert('تم نسخ الرابط للمشاركة!');
+            }
+        }
+
+        // Golden Tips Functions
+        function toggleTip(tipNumber) {
+            const index = state.tipsData.completed.indexOf(tipNumber);
+            const btn = document.getElementById(`btn-tip-${tipNumber}`);
+            const card = document.getElementById(`tip-${tipNumber}`);
+            
+            if (index === -1) {
+                state.tipsData.completed.push(tipNumber);
+                btn.innerHTML = '<i class="fas fa-check-double"></i> <span>تم التحقق</span>';
+                btn.classList.remove('bg-slate-700');
+                btn.classList.add('bg-green-600');
+                card.classList.add('completed');
+                playSuccessSound();
+                celebrateSmall();
+            } else {
+                state.tipsData.completed.splice(index, 1);
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> <span>تحقق</span>';
+                btn.classList.add('bg-slate-700');
+                btn.classList.remove('bg-green-600');
+                card.classList.remove('completed');
+            }
+            
+            updateTipsProgress();
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function updateTipsProgress() {
+            const completed = state.tipsData.completed.length;
+            const percentage = (completed / 10) * 100;
+            
+            document.getElementById('tips-progress-text').textContent = `${completed}/10`;
+            document.getElementById('tips-progress-bar').style.width = `${percentage}%`;
+            
+            const motivations = [
+                'ابدأ رحلتك نحو رمضان مثالي!',
+                'خطوة بخطوة نحو الأفضل',
+                'أحسنت! واصل التقدم',
+                'نصف الطريق إلى الكمال',
+                'رمضان يقترب من الكمال!',
+                'أنت قريب جداً من الهدف',
+                'التميز في رمضان!',
+                'رمضان استثنائي!',
+                'الكمال قاب قوسين أو أدنى!',
+                'مبارك! رمضان مثالي 🌟'
+            ];
+            
+            document.getElementById('tips-motivation').textContent = motivations[completed] || motivations[0];
+            
+            if (completed === 10) {
+                celebrateAchievement();
+            }
+        }
+
+        function saveTipNote(tipNumber, note) {
+            state.tipsData.notes[tipNumber] = note;
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function addTadabburPage() {
+            state.tipsData.tadabburPages++;
+            document.getElementById('tadabbur-pages').textContent = state.tipsData.tadabburPages;
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function updateBadHabitCheck(index) {
+            state.tipsData.badHabits[index] = !state.tipsData.badHabits[index];
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function addSocialFreeHour(hours) {
+            state.tipsData.socialFreeHours += hours;
+            document.getElementById('social-free-hours').textContent = state.tipsData.socialFreeHours;
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function updateCharityAmount(value) {
+            state.tipsData.charityAmount = value;
+            document.getElementById('daily-charity-amount').textContent = `${value} ريال`;
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function updateVolunteerCheck(index) {
+            state.tipsData.volunteerChecks[index] = !state.tipsData.volunteerChecks[index];
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function markHealthyFood(type) {
+            if (!state.tipsData.healthyFood.includes(type)) {
+                state.tipsData.healthyFood.push(type);
+                document.querySelector(`[data-food="${type}"]`).classList.add('bg-lime-600/30', 'border-lime-500');
+            }
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function selectNameOfAllah(name) {
+            state.tipsData.todaysName = name;
+            const meaningDiv = document.getElementById('name-meaning');
+            if (namesOfAllah[name]) {
+                meaningDiv.textContent = namesOfAllah[name];
+                meaningDiv.classList.remove('hidden');
+            }
+            localStorage.setItem('ramadan1447_tips', JSON.stringify(state.tipsData));
+        }
+
+        function shareTips() {
+            const text = `عشرة اقتراحات لرمضان 1447:
+1️⃣ الاعتذار ورد المظالم
+2️⃣ التدبر لا كثرة القراءة
+3️⃣ الصوم عن سيئات الأعمال
+4️⃣ الصوم عن وسائل التواصل
+5️⃣ صدقة كل يوم
+6️⃣ الفجر قبل التراويح
+7️⃣ العفو والسماح
+8️⃣ التطوع بالجهد
+9️⃣ أحسن إفطارك
+🔟 أسماء الله الحسنى
+
+تطبيق محراب رمضان 1447 - رفيقك الرقمي في الشهر الكريم`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'عشرة اقتراحات لرمضان مثالي',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(text);
+                alert('تم نسخ الاقتراحات!');
+            }
+        }
+
+        // Scoring Algorithm
+        function calculateScore() {
+            const data = state.ramadanData[state.currentDay];
+            let score = 0;
+
+            // Prayers (40 points max)
+            let prayerScore = 0;
+            ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].forEach(prayer => {
+                if (data.prayers[prayer]) prayerScore += 6;
+                if (data.prayers.takbeer && data.prayers.takbeer[prayer]) prayerScore += 2;
+            });
+            score += Math.min(40, prayerScore);
+
+            // Sunnah (15 points)
+            score += (data.sunnah / 12) * 15;
+
+            // Duha (10 points)
+            score += (data.duha / 8) * 10;
+
+            // Taraweeh (15 points)
+            score += (data.taraweeh / 8) * 15;
+
+            // Qiyam (10 points)
+            score += data.qiyam >= 8 ? 10 : (data.qiyam / 8) * 10;
+
+            // Witr (5 points)
+            if (data.witr) score += 5;
+
+            // Quran (20 points)
+            score += (data.quran / 30) * 20;
+
+            // Memorization (5 points)
+            if (data.memorization) score += 2.5;
+
+            // Athkar (5 points)
+            if (data.athkar.morning) score += 2.5;
+            if (data.athkar.evening) score += 2.5;
+
+            // Social (10 points)
+            let socialCount = 0;
+            if (data.social.parents) socialCount++;
+            if (data.social.family_session) socialCount++;
+            if (data.social.children_follow) socialCount++;
+            score += (socialCount / 3) * 10;
+
+            // Weekly (10 points distributed)
+            let weeklyScore = 0;
+            ['friends', 'lessons', 'brotherhood', 'iftar'].forEach(type => {
+                weeklyScore += data.weekly[type].filter(Boolean).length;
+            });
+            score += (weeklyScore / 16) * 10;
+
+            // Charity (5 points)
+            if (data.social.charity) score += 2.5;
+            if (data.advice >= 3) score += 2.5;
+
+            // Media (5 points)
+            score += (data.media.book / 30) * 5;
+            if (data.media.program) score += 2.5;
+
+            data.score = Math.round(score);
+            
+            updateProgressCircle(data.score);
+            
+            localStorage.setItem('ramadan1447', JSON.stringify(state.ramadanData));
+            
+            return data.score;
+        }
+
+        function updateProgressCircle(percentage) {
+            const circle = document.getElementById('progress-circle');
+            const radius = 70;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (percentage / 100) * circumference;
+            
+            circle.style.strokeDashoffset = offset;
+            document.getElementById('daily-percentage').textContent = `${percentage}%`;
+            
+            if (percentage >= 80) {
+                document.getElementById('daily-percentage').className = 'text-4xl font-bold text-ramadan-gold';
+            } else if (percentage >= 50) {
+                document.getElementById('daily-percentage').className = 'text-4xl font-bold text-ramadan-teal';
+            } else {
+                document.getElementById('daily-percentage').className = 'text-4xl font-bold text-slate-400';
+            }
+        }
+
+        function checkBestDay() {
+            const currentScore = state.ramadanData[state.currentDay].score;
+            let bestScore = 0;
+            
+            Object.keys(state.ramadanData).forEach(day => {
+                if (parseInt(day) !== state.currentDay && state.ramadanData[day].score > bestScore) {
+                    bestScore = state.ramadanData[day].score;
+                }
+            });
+            
+            if (currentScore >= bestScore && currentScore > 50) {
+                document.getElementById('best-day-badge').classList.remove('hidden');
+                celebrateAchievement();
+            }
+        }
+
+        // Dashboard Functions
+        function updateDashboard() {
+            const days = Object.keys(state.ramadanData).length;
+            const completedDays = Object.values(state.ramadanData).filter(d => d.score > 50).length;
+            const avgScore = days > 0 ? Math.round(Object.values(state.ramadanData).reduce((a, b) => a + b.score, 0) / days) : 0;
+            const totalAjr = Object.values(state.ramadanData).reduce((a, b) => a + (b.score * 10), 0);
+            
+            document.getElementById('completed-days').textContent = `${completedDays}/30`;
+            document.getElementById('avg-score').textContent = `${avgScore}%`;
+            document.getElementById('total-ajr').textContent = totalAjr.toLocaleString();
+            
+            renderCalendar();
+            renderChart();
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+            
+            for (let i = 1; i <= 30; i++) {
+                const dayData = state.ramadanData[i];
+                const score = dayData ? dayData.score : 0;
+                const isToday = i === state.currentDay;
+                
+                let bgClass = 'bg-slate-800/50';
+                let textClass = 'text-slate-500';
+                
+                if (score >= 80) {
+                    bgClass = 'bg-ramadan-gold/30 border-ramadan-gold';
+                    textClass = 'text-ramadan-gold';
+                } else if (score >= 50) {
+                    bgClass = 'bg-ramadan-teal/20 border-ramadan-teal/50';
+                    textClass = 'text-ramadan-teal';
+                } else if (score > 0) {
+                    bgClass = 'bg-slate-700';
+                    textClass = 'text-slate-300';
+                }
+                
+                const dayCard = document.createElement('div');
+                dayCard.className = `day-card aspect-square rounded-xl flex flex-col items-center justify-center cursor-pointer border ${bgClass} ${textClass} ${isToday ? 'ring-2 ring-ramadan-accent' : ''}`;
+                dayCard.innerHTML = `
+                    <span class="text-xs opacity-70">${i}</span>
+                    <span class="text-lg font-bold">${score > 0 ? score + '%' : '-'}</span>
+                `;
+                dayCard.onclick = () => loadDay(i);
+                grid.appendChild(dayCard);
+            }
+        }
+
+        function loadDay(day) {
+            state.currentDay = day;
+            initializeDay(day);
+            
+            const data = state.ramadanData[day];
+            document.querySelectorAll('.prayer-item').forEach(item => {
+                const prayer = item.dataset.prayer;
+                const checkbox = item.querySelector('.task-checkbox');
+                const takbeer = item.querySelector('.takbeer-checkbox');
+                
+                checkbox.checked = data.prayers[prayer] || false;
+                takbeer.checked = data.prayers.takbeer && data.prayers.takbeer[prayer] || false;
+                updatePrayerScore(prayer);
+            });
+            
+            document.getElementById('sunnah-count').textContent = data.sunnah;
+            document.getElementById('sunnah-progress').style.width = `${(data.sunnah / 12) * 100}%`;
+            
+            setDuha(data.duha);
+            document.getElementById('taraweeh-value').textContent = data.taraweeh;
+            
+            updateQuranUI();
+            
+            calculateScore();
+            switchTab('dashboard');
+            
+            document.getElementById('ramadan-day').textContent = `يوم ${day} رمضان`;
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            const days = Object.keys(state.ramadanData).sort((a, b) => a - b);
+            const scores = days.map(d => state.ramadanData[d].score);
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: days.map(d => `يوم ${d}`),
+                    datasets: [{
+                        label: 'نسبة الإنجاز',
+                        data: scores,
+                        borderColor: '#d4af37',
+                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(148, 163, 184, 0.2)' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Focus Mode
+        function activateFocusMode() {
+            state.focusMode = true;
+            document.getElementById('focus-mode').classList.remove('hidden');
+            
+            let minutes = 0;
+            let seconds = 0;
+            state.focusInterval = setInterval(() => {
+                seconds++;
+                if (seconds >= 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+                document.getElementById('focus-timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function deactivateFocusMode() {
+            state.focusMode = false;
+            clearInterval(state.focusInterval);
+            document.getElementById('focus-mode').classList.add('hidden');
+        }
+
+        // Celebration Effects
+        function celebrateSmall() {
+            confetti({
+                particleCount: 30,
+                spread: 50,
+                origin: { y: 0.8 },
+                colors: ['#d4af37', '#f4d03f']
+            });
+        }
+
+        function celebrateAchievement() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#d4af37', '#f4d03f', '#0d9488']
+            });
+            
+            const score = state.ramadanData[state.currentDay].score;
+            if (score >= 80) {
+                setTimeout(() => {
+                    document.getElementById('celebration-score').textContent = score;
+                    document.getElementById('celebration-message').textContent = 
+                        score >= 95 ? 'أحسنت! لقد حققت تقوى عالية اليوم' : 
+                        score >= 80 ? 'ممتاز! استمر في هذا الأداء' : 'أحسنت! واصل التقدم';
+                    document.getElementById('celebration-modal').classList.remove('hidden');
+                    document.getElementById('celebration-content').classList.remove('scale-95');
+                    document.getElementById('celebration-content').classList.add('scale-100');
+                }, 500);
+            }
+        }
+
+        function closeCelebration() {
+            document.getElementById('celebration-modal').classList.add('hidden');
+        }
+
+        // Audio Feedback
+        function playSuccessSound() {
+            try {
+                const synth = new Tone.Synth().toDestination();
+                synth.triggerAttackRelease("C5", "0.1");
+                setTimeout(() => synth.triggerAttackRelease("E5", "0.1"), 100);
+            } catch (e) {
+                console.log('Audio not supported');
+            }
+        }
+
+// Clear today's data with password
+function clearTodayData() {
+    if (confirm("هل أنت متأكد من مسح بيانات اليوم الحالي؟")) {
+        // إعادة تعيين بيانات اليوم الحالي إلى القيم الافتراضية
+        const defaultDay = {
+            prayers: { fajr: false, dhuhr: false, asr: false, maghrib: false, isha: false, takbeer: {} },
+            sunnah: 0,
+            duha: 0,
+            taraweeh: 0,
+            qiyam: 0,
+            witr: false,
+            quran: 0,
+            quranRange: { fromSurah: 1, fromAyah: 1, toSurah: 2, toAyah: 286 },
+            memorization: false,
+            athkar: { morning: false, evening: false },
+            accounting: false,
+            duas: ['', ''],
+            social: { parents: false, family_session: false, children_follow: false, charity: false },
+            weekly: { friends: [false, false, false, false], lessons: [false, false, false, false], brotherhood: [false, false, false, false], iftar: [false, false, false, false] },
+            advice: 0,
+            media: { book: 0, program: false },
+            score: 0,
+            completed: false
+        };
+        state.ramadanData[state.currentDay] = defaultDay;
+        localStorage.setItem('ramadan1447', JSON.stringify(state.ramadanData));
+        // إعادة تحميل اليوم الحالي في الواجهة
+        loadDay(state.currentDay);
+        // تحديث لوحة التحكم إذا كنا فيها
+        if (state.currentTab === 'dashboard') updateDashboard();
+        alert("تم مسح بيانات اليوم بنجاح.");
+    }
+}
+
+// Clear all data with password
+function clearAllData() {
+    const password = prompt("الرجاء إدخال كلمة المرور لمسح كل البيانات:");
+    if (password !== "123") {
+        alert("كلمة المرور غير صحيحة!");
+        return;
+    }
+    if (confirm("هل أنت متأكد من مسح جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.")) {
+        state.ramadanData = {};
+        // إعادة تهيئة اليوم الحالي
+        initializeDay(state.currentDay);
+        localStorage.setItem('ramadan1447', JSON.stringify(state.ramadanData));
+        loadDay(state.currentDay);
+        if (state.currentTab === 'dashboard') updateDashboard();
+        alert("تم مسح جميع البيانات بنجاح.");
+    }
+}
+
+        // Export to CSV with UTF-8 BOM
+        function exportToGoogleSheets() {
+            let csv = '\uFEFFاليوم,الفجر,الظهر,العصر,المغرب,العشاء,السنن,الضحى,تراويح,قيام,وتر,قرآن,المجموع\n';
+            
+            for (let i = 1; i <= 30; i++) {
+                const d = state.ramadanData[i];
+                if (d) {
+                    csv += `${i},${d.prayers.fajr ? 1 : 0},${d.prayers.dhuhr ? 1 : 0},${d.prayers.asr ? 1 : 0},${d.prayers.maghrib ? 1 : 0},${d.prayers.isha ? 1 : 0},${d.sunnah},${d.duha},${d.taraweeh},${d.qiyam},${d.witr ? 1 : 0},${d.quran},${d.score}\n`;
+                }
+            }
+            
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'ramadan_1447_data.csv';
+            link.click();
+            
+            alert('تم تصدير البيانات للاكسل Excel');
+        }
+
+        // Time Thief Reminder
+        setInterval(() => {
+            if (Math.random() > 0.7 && !state.focusMode) {
+                const messages = [
+                    'تذكر: لا تسرق نفسك بالهاتف',
+                    'اغتنم الوقت، رمضان يمر سريعاً',
+                    'أغلق التطبيقات وافتح المصحف',
+                    'دقيقة في رمضان = دقيقة ذهبية'
+                ];
+                
+                const notif = document.createElement('div');
+                notif.className = 'fixed bottom-4 right-4 bg-ramadan-darker border border-ramadan-gold/50 text-ramadan-gold px-6 py-4 rounded-2xl shadow-2xl z-50 animate-slide-up';
+                notif.innerHTML = `<i class="fas fa-clock ml-2"></i> ${messages[Math.floor(Math.random() * messages.length)]}`;
+                document.body.appendChild(notif);
+                
+                setTimeout(() => notif.remove(), 5000);
+            }
+        }, 300000);
+
+        // Initialize
+        window.onload = function() {
+            // Calculate current Ramadan day
+            state.currentDay = calculateRamadanDay();
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('ramadan1447_theme');
+            if (savedTheme === 'light') {
+                toggleTheme();
+            }
+            
+            // Load saved data
+            const saved = localStorage.getItem('ramadan1447');
+            if (saved) {
+                state.ramadanData = JSON.parse(saved);
+            }
+            
+            // Load tips data
+            const savedTips = localStorage.getItem('ramadan1447_tips');
+            if (savedTips) {
+                state.tipsData = JSON.parse(savedTips);
+                updateTipsProgress();
+                document.getElementById('tadabbur-pages').textContent = state.tipsData.tadabburPages;
+                document.getElementById('social-free-hours').textContent = state.tipsData.socialFreeHours;
+                document.getElementById('daily-charity-amount').textContent = `${state.tipsData.charityAmount} ريال`;
+                
+                state.tipsData.completed.forEach(tipNum => {
+                    const btn = document.getElementById(`btn-tip-${tipNum}`);
+                    const card = document.getElementById(`tip-${tipNum}`);
+                    if (btn && card) {
+                        btn.innerHTML = '<i class="fas fa-check-double"></i> <span>تم التحقق</span>';
+                        btn.classList.remove('bg-slate-700');
+                        btn.classList.add('bg-green-600');
+                        card.classList.add('completed');
+                    }
+                });
+            }
+            
+            // Set dates
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('ar-SA', options);
+            document.getElementById('ramadan-day').textContent = `يوم ${state.currentDay} رمضان`;
+            
+            // Check if Ramadan has started
+            if (now < RAMADAN_START_DATE) {
+                const daysUntil = Math.ceil((RAMADAN_START_DATE - now) / (1000 * 60 * 60 * 24));
+                document.getElementById('ramadan-status').textContent = `متبقي ${daysUntil} يوم على رمضان`;
+            } else {
+                document.getElementById('ramadan-status').textContent = 'رمضان مبارك';
+            }
+            
+            // Initialize current day
+            initializeDay(state.currentDay);
+            loadDay(state.currentDay);
+            
+            // Hide Ayat loading
+            document.getElementById('ayat-frame').onload = function() {
+                document.getElementById('ayat-loading').classList.add('hidden');
+            };
+            setTimeout(() => {
+                document.getElementById('ayat-loading').classList.add('hidden');
+            }, 5000);
+        };
+    </script>
+</body>
+</html>
