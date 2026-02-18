@@ -1,0 +1,21 @@
+{
+  "name": "محراب رمضان 1447",
+  "short_name": "محراب رمضان",
+  "description": "رفيقك الرقمي في الشهر الكريم",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#d4af37",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20192%20192%22%3E%3Ccircle%20cx%3D%2296%22%20cy%3D%2296%22%20r%3D%2280%22%20fill%3D%22%23d4af37%22%2F%3E%3Cpath%20d%3D%22M140%2C60%20Q160%2C96%20140%2C132%20Q110%2C160%2060%2C132%20Q40%2C96%2060%2C60%20Q90%2C40%20140%2C60%22%20fill%3D%22%23f4d03f%22%2F%3E%3C%2Fsvg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22256%22%20r%3D%22230%22%20fill%3D%22%23d4af37%22%2F%3E%3Cpath%20d%3D%22M358%2C153%20Q410%2C256%20358%2C358%20Q256%2C410%20153%2C358%20Q102%2C256%20153%2C153%20Q256%2C102%20358%2C153%22%20fill%3D%22%23f4d03f%22%2F%3E%3C%2Fsvg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
