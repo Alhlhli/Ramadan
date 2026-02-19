@@ -4,18 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>زاد رمضان 1447 - رفيقك الرقمي في الشهر الكريم</title>
-    <link rel="manifest" href="manifest.json">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./service-worker.js')
-                    .then(reg => console.log('Service Worker: Registered'))
-                    .catch(err => console.error('Service Worker: Error', err));
-            });
-        }
-    </script>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
@@ -463,6 +454,88 @@
         html.light-theme .bg-slate-900 { background-color: #ffffff; }
         html.light-theme .border-slate-700 { border-color: #e2e8f0; }
         html.light-theme .border-slate-800 { border-color: #f1f5f9; }
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  width: auto;
+  max-width: 90%;
+}
+.toast {
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  padding: 12px 24px;
+  color: #f8fafc;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 500px;
+  animation: toastSlideIn 0.3s ease, toastFadeOut 0.3s ease 2.7s forwards;
+  pointer-events: auto;
+  border-right: 4px solid;
+}
+html.light-theme .toast {
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+.toast.info { border-right-color: #3b82f6; }
+.toast.success { border-right-color: #10b981; }
+.toast.warning { border-right-color: #f59e0b; }
+.toast.error { border-right-color: #ef4444; }
+.toast i { font-size: 1.2rem; }
+.toast.info i { color: #3b82f6; }
+.toast.success i { color: #10b981; }
+.toast.warning i { color: #f59e0b; }
+.toast.error i { color: #ef4444; }
+@keyframes toastSlideIn {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes toastFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Install Button */
+#install-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+  color: #020617;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s ease;
+}
+#install-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
     </style>
 </head>
 <body>
@@ -2075,7 +2148,6 @@
             </button>
         </div>
     </div>
-
     <script>
         // Application State
         const state = {
@@ -3190,6 +3262,125 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Audio not supported');
             }
         }
+
+// ========== نظام Toast Notifications ==========
+function showToast(message, type = 'info', duration = 3000) {
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  let icon = '';
+  switch (type) {
+    case 'success': icon = '<i class="fas fa-check-circle"></i>'; break;
+    case 'warning': icon = '<i class="fas fa-exclamation-triangle"></i>'; break;
+    case 'error': icon = '<i class="fas fa-times-circle"></i>'; break;
+    default: icon = '<i class="fas fa-info-circle"></i>';
+  }
+  toast.innerHTML = icon + '<span>' + message + '</span>';
+  container.appendChild(toast);
+  setTimeout(function() {
+    toast.style.animation = 'toastFadeOut 0.3s ease forwards';
+    setTimeout(function() {
+      if (toast.parentNode) toast.remove();
+      if (container.children.length === 0) container.remove();
+    }, 300);
+  }, duration);
+}
+
+// ========== إنشاء Manifest ديناميكياً ==========
+(function() {
+  var manifestData = {
+    name: "زاد رمضان 1447",
+    short_name: "زاد رمضان",
+    description: "رفيقك الرقمي في الشهر الكريم",
+    start_url: ".",
+    display: "standalone",
+    background_color: "#020617",
+    theme_color: "#d4af37",
+    orientation: "portrait-primary",
+    icons: [
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23020617'/%3E%3Cpath d='M50 20 Q60 35 70 30 Q75 40 65 50 Q75 60 70 70 Q60 65 50 75 Q40 65 30 70 Q25 60 35 50 Q25 40 30 30 Q40 35 50 20' fill='%23d4af37'/%3E%3Ctext x='50' y='75' text-anchor='middle' fill='%23d4af37' font-size='12' font-family='Tajawal'%3Eرمضان%3C/text%3E%3C/svg%3E", sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+      { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23020617'/%3E%3Cpath d='M50 20 Q60 35 70 30 Q75 40 65 50 Q75 60 70 70 Q60 65 50 75 Q40 65 30 70 Q25 60 35 50 Q25 40 30 30 Q40 35 50 20' fill='%23d4af37'/%3E%3Ctext x='50' y='75' text-anchor='middle' fill='%23d4af37' font-size='12' font-family='Tajawal'%3Eرمضان%3C/text%3E%3C/svg%3E", sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+    ]
+  };
+  var manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
+  var manifestURL = URL.createObjectURL(manifestBlob);
+  var linkManifest = document.createElement('link');
+  linkManifest.rel = 'manifest';
+  linkManifest.href = manifestURL;
+  document.head.appendChild(linkManifest);
+})();
+
+// ========== إنشاء Service Worker ديناميكياً ==========
+if ('serviceWorker' in navigator) {
+  var swCode = `
+    const CACHE_NAME = 'ramadan-1447-v1';
+    const urlsToCache = [
+      '.',
+      'index.html',
+      'https://cdn.tailwindcss.com',
+      'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap',
+      'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+      'https://cdn.jsdelivr.net/npm/chart.js',
+      'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js'
+    ];
+    self.addEventListener('install', function(event) {
+      event.waitUntil(caches.open(CACHE_NAME).then(function(cache) { return cache.addAll(urlsToCache); }));
+    });
+    self.addEventListener('fetch', function(event) {
+      event.respondWith(
+        fetch(event.request)
+          .then(function(response) {
+            var responseClone = response.clone();
+            caches.open(CACHE_NAME).then(function(cache) { cache.put(event.request, responseClone); });
+            return response;
+          })
+          .catch(function() { return caches.match(event.request); })
+      );
+    });
+    self.addEventListener('activate', function(event) {
+      event.waitUntil(
+        caches.keys().then(function(keys) {
+          return Promise.all(keys.filter(function(k) { return k !== CACHE_NAME; }).map(function(k) { return caches.delete(k); }));
+        })
+      );
+    });
+  `;
+  var swBlob = new Blob([swCode], { type: 'application/javascript' });
+  var swURL = URL.createObjectURL(swBlob);
+  navigator.serviceWorker.register(swURL).then(function(reg) {
+    console.log('Service Worker registered');
+  }).catch(function(err) { console.log('SW registration failed:', err); });
+}
+
+// ========== زر تثبيت التطبيق ==========
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  var installBtn = document.createElement('button');
+  installBtn.id = 'install-btn';
+  installBtn.innerHTML = '<i class="fas fa-download"></i>';
+  installBtn.title = 'تثبيت التطبيق';
+  installBtn.onclick = function() {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(choiceResult) {
+      if (choiceResult.outcome === 'accepted') {
+        showToast('تم تثبيت التطبيق بنجاح!', 'success');
+      }
+      deferredPrompt = null;
+      installBtn.remove();
+    });
+  };
+  document.body.appendChild(installBtn);
+  showToast('يمكنك تثبيت التطبيق للوصول السريع', 'info');
+});
+
 
 // Clear today's data with password
 function clearTodayData() {
