@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>محراب رمضان 1447 - رفيقك الرقمي في الشهر الكريم</title>
+    <title>زاد رمضان 1447 - رفيقك الرقمي في الشهر الكريم</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -481,7 +481,7 @@
                     <i class="fas fa-moon text-3xl text-ramadan-darker"></i>
                 </div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold gold-gradient-text mb-2 font-naskh">محراب رمضان 1447</h1>
+            <h1 class="text-4xl md:text-6xl font-bold gold-gradient-text mb-2 font-naskh">زاد رمضان 1447</h1>
             <p class="text-ramadan-gold/80 text-lg md:text-xl font-light tracking-wide">"ليكن كأنه رمضانك الأخير"</p>
             
             <!-- Date & Hijri Display -->
@@ -1363,10 +1363,11 @@
                     <i class="fas fa-radio ml-2"></i>إذاعة القرآن
                 </button>
                 <button onclick="switchMediaTab('quran')" class="media-sub-btn px-6 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:bg-ramadan-gold/10" data-media="quran">
-                    <i class="fas fa-book-quran ml-2"></i>مصحف آيات
+                    <i class="fas fa-book-quran ml-2"></i>🕌 قاعدة بيانات القرآن الكريم الشاملة
+
                 </button>
                 <button onclick="switchMediaTab('shanqiti')" class="media-sub-btn px-6 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:bg-shanqiti/10 border border-shanqiti/20" data-media="shanqiti">
-                    <i class="fas fa-headphones ml-2"></i>الشيخ الشنقيطي
+                    <i class="fas fa-headphones ml-2"></i>دروس الشيخ الشنقيطي
                 </button>
                 <button onclick="switchMediaTab('cultural')" class="media-sub-btn px-6 py-2 rounded-full text-sm font-medium transition-all text-slate-400 hover:bg-ramadan-gold/10" data-media="cultural">
                     <i class="fas fa-graduation-cap ml-2"></i>محتوى ثقافي
@@ -1374,108 +1375,163 @@
             </div>
 
             <!-- Radio Section -->
-            <div id="media-radio" class="media-section">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Quran Radio -->
-                    <div class="glass-panel rounded-3xl p-6">
-                        <h3 class="text-ramadan-gold font-bold text-2xl mb-6 flex items-center gap-2">
-                            <i class="fas fa-broadcast-tower"></i> إذاعة القرآن الكريم
-                        </h3>
-                        
-                        <div class="audio-player rounded-2xl p-6 mb-6">
-                            <div class="flex items-center justify-between mb-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center animate-pulse-slow" id="radio-visualizer">
-                                        <i class="fas fa-signal text-white"></i>
-                                    </div>
-                                    <div>
-                                        <h4 id="current-station" class="font-bold text-white">إذاعة القرآن الكريم</h4>
-                                        <p class="text-xs text-white/70">بث مباشر</p>
-                                    </div>
-                                </div>
-                                <button onclick="toggleRadio()" id="play-btn" class="w-14 h-14 rounded-full bg-white text-ramadan-green flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-lg">
-                                    <i class="fas fa-play ml-1"></i>
-                                </button>
-                            </div>
-                            
-                            <audio id="quran-radio" preload="none">
-                                <source src="https://stream.radiojar.com/8s5u5tpdtwzuv" type="audio/mpeg">
-                                <source src="https://Qurango.net/radio/tarateel" type="audio/mpeg">
-                            </audio>
-
-                            <div class="h-1 bg-white/20 rounded-full overflow-hidden">
-                                <div id="audio-progress" class="h-full bg-white/60 w-0 transition-all duration-1000"></div>
-                            </div>
+<!-- Radio Section -->
+<div id="media-radio" class="media-section">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Quran Radio -->
+        <div class="glass-panel rounded-3xl p-6">
+            <h3 class="text-ramadan-gold font-bold text-2xl mb-6 flex items-center gap-2">
+                <i class="fas fa-broadcast-tower"></i> إذاعة القرآن الكريم
+            </h3>
+            
+            <div class="audio-player rounded-2xl p-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center animate-pulse-slow" id="radio-visualizer">
+                            <i class="fas fa-signal text-white"></i>
                         </div>
-
-                        <div class="grid grid-cols-2 gap-3">
-                            <button onclick="changeStation('https://stream.radiojar.com/8s5u5tpdtwzuv', 'إذاعة القرآن - القاهرة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
-                                <i class="fas fa-mosque ml-2 text-ramadan-gold"></i> القاهرة
-                            </button>
-                            <button onclick="changeStation('https://stream.radiojar.com/0tpy1h0kxtzuv', 'إذاعة القرآن - السعودية')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
-                                <i class="fas fa-kaaba ml-2 text-ramadan-gold"></i> السعودية
-                            </button>
-                            <button onclick="changeStation('https://Qurango.net/radio/tarateel', 'تراتيل قصيرة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
-                                <i class="fas fa-music ml-2 text-ramadan-gold"></i> تراتيل قصيرة
-                            </button>
-                            <button onclick="changeStation('https://Qurango.net/radio/sakeenah', 'آيات السكينة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
-                                <i class="fas fa-feather ml-2 text-ramadan-gold"></i> آيات السكينة
-                            </button>
+                        <div>
+                            <h4 id="current-station" class="font-bold text-white">إذاعة القرآن الكريم</h4>
+                            <p class="text-xs text-white/70">بث مباشر</p>
                         </div>
                     </div>
+                    <button onclick="toggleRadio()" id="play-btn" class="w-14 h-14 rounded-full bg-white text-ramadan-green flex items-center justify-center text-xl hover:scale-110 transition-transform shadow-lg">
+                        <i class="fas fa-play ml-1"></i>
+                    </button>
+                </div>
+                
+                <audio id="quran-radio" preload="none">
+                    <source src="https://stream.radiojar.com/8s5u5tpdtwzuv" type="audio/mpeg">
+                </audio>
 
-                    <!-- Radio Info -->
-                    <div class="glass-panel rounded-3xl p-6 flex flex-col justify-center">
-                        <div class="text-center">
-                            <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-ramadan-green to-ramadan-teal flex items-center justify-center">
-                                <i class="fas fa-radio text-4xl text-white"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-ramadan-gold mb-4">استمع إلى القرآن الكريم</h3>
-                            <p class="text-slate-400 mb-6 leading-relaxed">
-                                اختر من محطات الإذاعة المختلفة للاستماع إلى تلاوات متنوعة<br>
-                                من أفضل القراء حول العالم
-                            </p>
-                            <div class="flex justify-center gap-4 text-sm text-slate-500">
-                                <span class="flex items-center gap-2">
-                                    <i class="fas fa-wifi text-ramadan-teal"></i> بث مباشر
-                                </span>
-                                <span class="flex items-center gap-2">
-                                    <i class="fas fa-infinity text-ramadan-teal"></i> 24 ساعة
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="h-1 bg-white/20 rounded-full overflow-hidden">
+                    <div id="audio-progress" class="h-full bg-white/60 w-0 transition-all duration-1000"></div>
                 </div>
             </div>
 
-            <!-- Ayat Quran Section -->
-            <div id="media-quran" class="media-section hidden">
-                <div class="glass-panel rounded-3xl p-6">
-                    <h3 class="text-ramadan-gold font-bold text-2xl mb-6 flex items-center gap-2">
-                        <i class="fas fa-book-quran"></i> مصحف آيات
-                    </h3>
-                    
-                    <div class="bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 relative min-h-[600px]">
-                        <iframe id="ayat-frame" src="https://www.ayat.app" class="w-full h-full absolute inset-0 border-0" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
-                        
-                        <div id="ayat-loading" class="absolute inset-0 bg-slate-900 flex items-center justify-center">
-                            <div class="text-center">
-                                <i class="fas fa-spinner fa-spin text-4xl text-ramadan-gold mb-4"></i>
-                                <p class="text-slate-400">جاري تحميل المصحف...</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4 flex gap-2">
-                        <a href="https://www.ayat.app" target="_blank" class="flex-1 py-3 bg-ramadan-green text-white rounded-xl text-center font-bold hover:bg-ramadan-green/80 transition-colors">
-                            <i class="fas fa-external-link-alt ml-2"></i> فتح في نافذة جديدة
-                        </a>
-                        <button onclick="refreshAyat()" class="px-6 py-3 bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition-colors">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                    </div>
+            <!-- زر القائمة الكاملة -->
+            <a href="http://alhlhli.github.io/Quran-Radio" target="_blank" class="block w-full mb-4 p-4 bg-gradient-to-r from-ramadan-gold to-amber-500 hover:from-amber-400 hover:to-amber-600 rounded-xl text-center font-bold text-slate-900 shadow-lg hover:shadow-xl transition-all transform hover:scale-105">
+                <i class="fas fa-list-ul ml-2"></i>
+                اضغط هنا للقائمة الكاملة للإذاعات والقراء
+            </a>
+
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="changeStation('https://stream.radiojar.com/8s5u5tpdtwzuv', 'إذاعة القرآن - القاهرة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-mosque ml-2 text-ramadan-gold"></i> القاهرة
+                </button>
+                <button onclick="changeStation('https://stream.radiojar.com/0tpy1h0kxtzuv', 'إذاعة القرآن - السعودية')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-kaaba ml-2 text-ramadan-gold"></i> السعودية
+                </button>
+                <button onclick="changeStation('https://kwtkrdota.cdn.mangomolo.com/qrrdo/qrrdo.stream_aac/chunklist.m3u8', 'إذاعة القرآن - الكويت')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-kaaba ml-2 text-ramadan-gold"></i> الكويت
+                </button>
+                <button onclick="changeStation('https://quran-radio.org:8440/;?type=http&nocache=29', 'إذاعة القرآن - نابلس')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-kaaba ml-2 text-ramadan-gold"></i> نابلس
+                </button>
+                <button onclick="changeStation('https://Qurango.net/radio/tarateel', 'تراتيل قصيرة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-music ml-2 text-ramadan-gold"></i> تراتيل قصيرة
+                </button>
+                <button onclick="changeStation('https://Qurango.net/radio/sakeenah', 'آيات السكينة')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-feather ml-2 text-ramadan-gold"></i> آيات السكينة
+                </button>
+                
+                <button onclick="changeStation('https://qurango.net/radio/ahmed_altrabulsi', 'أحمد خضر الطرابلسي')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> أحمد خضر الطرابلسي
+                </button>
+                <button onclick="changeStation('https://qurango.net/radio/maher_al_meaqli', 'ماهر المعيقلي')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> ماهر المعيقلي
+                </button>
+                <button onclick="changeStation('https://qurango.net/radio/abdulbasit_abdulsamad', 'عبد الباسط عبد الصمد')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> عبد الباسط عبد الصمد
+                </button>
+                <button onclick="changeStation('https://qurango.net/radio/mishary_alafasi', 'مشاري العفاسي')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> مشاري العفاسي
+                </button>
+                <button onclick="changeStation('https://qurango.net/radio/saud_alshuraim', 'سعود الشريم')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> سعود الشريم
+                </button>
+                <button onclick="changeStation('https://qurango.net/radio/yasser_aldosari', 'ياسر الدوسري')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> ياسر الدوسري
+                </button>
+                <button onclick="changeStation('https://qurango.net/radio/nasser_alqatami', 'ناصر القطامي')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> ناصر القطامي
+                </button>
+                <button onclick="changeStation('https://qurango.net/radio/fares_abbad', 'فارس عباد')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> فارس عباد
+                </button>
+                <button onclick="changeStation('https://qurango.net/radio/abdulrahman_alsudaes', 'عبدالرحمن السديس')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> عبدالرحمن السديس
+                </button>
+                <button onclick="changeStation('https://Qurango.net/radio/salman_al_utaybi', 'سلمان العتيبي')" class="p-3 bg-slate-800 hover:bg-ramadan-gold/20 rounded-xl text-sm transition-colors text-right border border-slate-700 hover:border-ramadan-gold">
+                    <i class="fas fa-microphone ml-2 text-ramadan-gold"></i> سلمان العتيبي
+                </button>
+            </div>
+        </div>
+
+        <!-- Radio Info -->
+        <div class="glass-panel rounded-3xl p-6 flex flex-col justify-center">
+            <div class="text-center">
+                <!-- تم تحويل الأيقونة إلى زر قابل للنقر -->
+                <a href="http://alhlhli.github.io/Quran-Radio" target="_blank" class="block w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-ramadan-green to-ramadan-teal flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer group">
+                    <i class="fas fa-radio text-4xl text-white group-hover:animate-pulse"></i>
+                </a>
+                <h3 class="text-2xl font-bold text-ramadan-gold mb-4">استمع إلى القرآن الكريم</h3>
+                <p class="text-slate-400 mb-6 leading-relaxed">
+                    اختر من محطات الإذاعة المختلفة للاستماع إلى تلاوات متنوعة<br>
+                    من أفضل القراء حول العالم
+                </p>
+                <div class="flex justify-center gap-4 text-sm text-slate-500">
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-wifi text-ramadan-teal"></i> بث مباشر
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-infinity text-ramadan-teal"></i> 24 ساعة
+                    </span>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ayat Quran Section -->
+<div id="media-quran" class="media-section w-full min-h-screen p-2 md:p-4">
+    <div class="glass-panel rounded-3xl p-4 bg-slate-900/50 border border-slate-700 flex flex-col h-[92vh]">
+        
+        <!-- Header -->
+        <h3 class="text-amber-500 font-bold text-xl mb-4 flex items-center gap-2 shrink-0">
+            <i class="fas fa-book-quran"></i> قاعدة بيانات القرآن الكريم الشاملة - 114 سورة كاملة
+        </h3>
+        
+        <!-- Container with dynamic height -->
+        <div class="bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 relative flex-grow">
+            <iframe id="ayat-frame" 
+                    src="https://alhlhli.github.io/Quran-Database/" 
+                    class="w-full h-full border-0" 
+                    onload="document.getElementById('ayat-loading').classList.add('hidden')"
+                    allow="fullscreen"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
+            </iframe>
+            
+            <!-- Loading indicator -->
+            <div id="ayat-loading" class="absolute inset-0 bg-slate-900 flex items-center justify-center">
+                <div class="text-center">
+                    <i class="fas fa-spinner fa-spin text-4xl text-amber-500 mb-4"></i>
+                    <p class="text-slate-400 font-sans">جاري فتح قاعدة البيانات ...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controls -->
+        <div class="mt-4 flex gap-2 shrink-0">
+            <a href="https://alhlhli.github.io/Quran-Database/" target="_blank" class="flex-1 py-3 bg-emerald-700 text-white rounded-xl text-center font-bold hover:bg-emerald-600 transition-colors flex items-center justify-center gap-2">
+                <i class="fas fa-expand"></i> عرض ملء الشاشة
+            </a>
+            <button onclick="refreshAyat()" class="px-6 py-3 bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 transition-colors">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+    </div>
+</div>
 
             <!-- Sheikh Shanqiti Section -->
             <div id="media-shanqiti" class="media-section hidden">
@@ -1977,7 +2033,7 @@
         <footer class="mt-12 text-center text-slate-500 text-sm pb-8">
             <div class="glass-panel rounded-2xl p-6 mb-4 inline-block max-w-2xl w-full">
                 <p class="mb-2 font-naskh text-lg text-ramadan-gold/80">"مَنْ عَمِلَ صَالِحًا مِّن ذَكَرٍ أَوْ أُنثَىٰ وَهُوَ مُؤْمِنٌ فَلَنُحْيِيَنَّهُ حَيَاةً طَيِّبَةً"</p>
-                <p class="text-xs text-slate-600">محراب رمضان 1447 - تطبيق ويب تفاعلي لإدارة الشهر الكريم</p>
+                <p class="text-xs text-slate-600">زاد رمضان 1447 - تطبيق ويب تفاعلي لإدارة الشهر الكريم</p>
             </div>
         </footer>
     </div>
@@ -2317,7 +2373,7 @@ const shanqitiAudios = [
         function shareShanqitiList() {
             const text = `مقاطع مميزة عن رمضان للشيخ محمد المختار الشنقيطي:\n\n` +
                 shanqitiAudios.map(a => `${a.id}. ${a.title}`).join('\n') +
-                `\n\nتطبيق محراب رمضان 1447`;
+                `\n\nتطبيق زاد رمضان 1447`;
             
             if (navigator.share) {
                 navigator.share({
@@ -2694,7 +2750,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function shareBenefit() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'محراب رمضان 1447',
+                    title: 'زاد رمضان 1447',
                     text: 'شارك في نشر الخير هذا الشهر الكريم',
                     url: window.location.href
                 });
@@ -2820,7 +2876,7 @@ document.addEventListener('DOMContentLoaded', function() {
 9️⃣ أحسن إفطارك
 🔟 أسماء الله الحسنى
 
-تطبيق محراب رمضان 1447 - رفيقك الرقمي في الشهر الكريم`;
+تطبيق زاد رمضان 1447 - رفيقك الرقمي في الشهر الكريم`;
             
             if (navigator.share) {
                 navigator.share({
